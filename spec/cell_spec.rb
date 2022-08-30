@@ -84,6 +84,10 @@ RSpec.describe Cell do
       expect(cell_2.render).to eq "X"
     end
 
+    it "takes a boolean arguement which shows a ship if one is present" do 
+      @cell_1.place_ship(@cruiser)
+      expect(@cell_1.render).to eq "."
+      expect(@cell_1.render(true)).to eq "S"
+    end
   end
-
 end
