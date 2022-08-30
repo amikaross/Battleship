@@ -7,6 +7,7 @@ class Cell
     @ship = nil
     @coordinate = coordinate
     @fired_upon = false
+    @render = "."
   end
 
   def empty?
@@ -37,5 +38,9 @@ class Cell
       false
     end
   end
+
+  # def render
+  #
+  # end
 
 end
