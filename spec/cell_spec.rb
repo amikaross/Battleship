@@ -57,13 +57,32 @@ RSpec.describe Cell do
       expect(@cell_1.fired_upon?).to eq true 
     end
 
-    it "knows when a ship is not present"
-    expect(@cell_1.fired_upon?).to eq false
-    @cell_1.fire_upon 
-    expect(@cell_1.fired_upon?).to eq true 
+    it "knows when its been fired upon even if a ship is not present" do 
+      expect(@cell_1.fired_upon?).to eq false
+      @cell_1.fire_upon 
+      expect(@cell_1.fired_upon?).to eq true 
+    end 
   end
 
   describe "#render" do 
+    it "returns the correct string when the cell is empty (is/isn't hit)" do
+      expect(@cell_1.render).to eq "."
+      @cell_1.fire_upon 
+      expect(@cell_1.render).to eq "M"
+    end 
+
+    it "returns the correct string when the cell is not empty (is/isn't hit/sunk)" do 
+      cell_2 = Cell.new("C3")
+      cell_2.place_ship(@cruiser)
+      expect(cell_2.render).to eq "."
+      cell_2.fire_upon 
+      expect(cell_2.render).to eq "H"
+      expect(cell_2.ship.sunk?).to eq false 
+      @cruiser.hit 
+      @cruiser.hit 
+      expect(@cruiser.sunk?).to eq true 
+      expect(cell_2.render).to eq "X"
+    end
 
   end
 
