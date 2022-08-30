@@ -1,3 +1,5 @@
+require './lib/ship'
+
 class Cell
   attr_reader :coordinate, :ship
 
@@ -19,8 +21,16 @@ class Cell
     self.ship
   end
 
-  # def fire_upon
-  #   @ship.health -= 1
+  def fire_upon
+    @ship.health -= 1
+  end
+
+  # def fired_upon?
+  #   if self.fire_upon
+  #     true
+  #   else
+  #     false
+  #   end
   # end
 
-  end
+end
