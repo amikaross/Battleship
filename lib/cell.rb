@@ -17,7 +17,10 @@ class Cell
   def place_ship(ship_type)
     @ship = ship_type
     self.ship
-
   end
+
+  # def fire_upon
+  #   @ship.health -= 1
+  # end
 
   end
