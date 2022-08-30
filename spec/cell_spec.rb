@@ -20,3 +20,16 @@ RSpec.describe Cell do
     end
   end
 end
+
+  describe "#empty?" do 
+    it "starts out empty by default" do 
+      expect(@cell.ship).to eq nil 
+      expect(@cell.empty?).to eq true 
+    end
+
+    it "returns false when ship is on cell" do 
+      @cell.place_ship(@cruiser)
+      expect(@cell.empty?).to eq false 
+    end
+  end
+end
