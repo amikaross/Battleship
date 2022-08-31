@@ -69,18 +69,20 @@ RSpec.describe Cell do
   end
 
   describe "#render" do
-    xit "returns the correct string when the cell is empty (is/isn't hit)" do
+    it "returns the correct string when the cell is empty (is/isn't hit)" do
       expect(@cell_1.render).to eq "."
+      # require "pry";binding.pry
       @cell_1.fire_upon
       expect(@cell_1.render).to eq "M"
     end
 
-    xit "returns the correct string when the cell is not empty (is/isn't hit/sunk)" do
-      cell_2 = Cell.new("C3")
-      cell_2.place_ship(@cruiser)
+    it "returns the correct string when the cell is not empty (is/isn't hit/sunk)" do
+      @cell_2 = Cell.new("C3")
+      @cell_2.place_ship(@cruiser)
       expect(cell_2.render).to eq "."
-      cell_2.fire_upon
+      @cell_2.fire_upon
       expect(cell_2.render).to eq "H"
+      require "pry";binding.pry
       expect(cell_2.ship.sunk?).to eq false
       @cruiser.hit
       @cruiser.hit
