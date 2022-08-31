@@ -1,7 +1,7 @@
 require './lib/ship'
 
 class Cell
-  attr_reader :coordinate, :ship, :fire_upon
+  attr_reader :coordinate, :ship, :fired_upon
 
   def initialize(coordinate)
     @ship = nil
@@ -11,7 +11,7 @@ class Cell
   end
 
   def empty?
-    if self.ship == nil
+    if @ship == nil
       true
     else
       false
@@ -20,15 +20,13 @@ class Cell
 
   def place_ship(ship_type)
     @ship = ship_type
-    self.ship
   end
 
   def fire_upon
     @fired_upon = true
-    if self.ship != nil
+    if @ship != nil
     @ship.health -= 1
-  end
-
+    end
   end
 
   def fired_upon?
