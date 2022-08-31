@@ -37,18 +37,22 @@ class Cell
     end
   end
 
-  def render
-    if @fired_upon == false && @ship == nil
+  def render(ship_present = false)
+    #consider using or in addition to and, at that point order will matter
+    if fired_upon? == false && empty? == false
+      if ship_present == true
+        "S"
+      else
+        "."
+      end
+    elsif fired_upon? == false && empty? == true
       "."
-    elsif @fired_upon == false && @ship != nil
-      "."
-    elsif @fired_upon == true && @ship != nil && @ship.sunk? == true
+    elsif fired_upon? == true && empty? == false && @ship.sunk? == true
       "X"
-    elsif @fired_upon == true && @ship == nil
+    elsif fired_upon? == true && empty? == true
       "M"
-    elsif @fired_upon == true && @ship != nil
+    elsif fired_upon? == true && empty? == false
       "H"
     end
   end
-
 end
