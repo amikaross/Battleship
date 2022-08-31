@@ -40,8 +40,14 @@ class Cell
   def render
     if @fired_upon == false && @ship == nil
       "."
+    elsif @fired_upon == false && @ship != nil
+      "."
+    elsif @fired_upon == true && @ship != nil && @ship.sunk? == true
+      "X"
     elsif @fired_upon == true && @ship == nil
       "M"
+    elsif @fired_upon == true && @ship != nil
+      "H"
     end
   end
 

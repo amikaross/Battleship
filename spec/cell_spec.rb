@@ -80,15 +80,14 @@ RSpec.describe Cell do
     it "returns the correct string when the cell is not empty (is/isn't hit/sunk)" do
       @cell_2 = Cell.new("C3")
       @cell_2.place_ship(@cruiser)
-      expect(cell_2.render).to eq "."
+      expect(@cell_2.render).to eq "."
       @cell_2.fire_upon
-      expect(cell_2.render).to eq "H"
-      require "pry";binding.pry
-      expect(cell_2.ship.sunk?).to eq false
+      expect(@cell_2.render).to eq "H"
+      expect(@cell_2.ship.sunk?).to eq false
       @cruiser.hit
       @cruiser.hit
       expect(@cruiser.sunk?).to eq true
-      expect(cell_2.render).to eq "X"
+      expect(@cell_2.render).to eq "X"
     end
 
   end
