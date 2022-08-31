@@ -77,7 +77,6 @@ RSpec.describe Cell do
     end
 
     it "returns the correct string when the cell is not empty (is/isn't hit/sunk)" do
-      @cell_2 = Cell.new("C3")
       @cell_2.place_ship(@cruiser)
       expect(@cell_2.render).to eq "."
       @cell_2.fire_upon
@@ -89,11 +88,10 @@ RSpec.describe Cell do
       expect(@cell_2.render).to eq "X"
     end
 
-    it "takes a boolean arguement which shows a ship if one is present" do 
+    it "takes a boolean arguement which shows a ship if one is present" do
       @cell_1.place_ship(@cruiser)
       expect(@cell_1.render).to eq "."
       expect(@cell_1.render(true)).to eq "S"
     end
   end
 end
-
