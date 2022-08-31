@@ -7,6 +7,7 @@ RSpec.describe Cell do
   before(:each) do
     @cruiser = Ship.new("Cruiser", 3)
     @cell_1 = Cell.new("B4")
+    @cell_2 = Cell.new("C3")
   end
 
   describe "#initialize" do
