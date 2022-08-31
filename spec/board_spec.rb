@@ -1,6 +1,6 @@
 require 'rspec'
-require './lib/cell' 
-require './lib/ship' #may not need this, may be accessible through the cell file
+require './lib/board'
+
 
 RSpec.describe Board do
   before(:each) do
