@@ -70,6 +70,7 @@ RSpec.describe Board do
       @board.place(@cruiser, ["A1", "A2", "A3"])
       expect(@board.valid_placement?(@submarine, ["B1", "B2"])).to eq(true)
       expect(@board.valid_placement?(@submarine, ["A1", "B1"])).to eq(false)
+    end 
     # xit "If the previous checks pass, then valid_placement? should be true" do
     #   expect(@board.valid_placement?(@cruiser, ["B1", "C1", "D1"])).to eq(true)
     #   expect(@board.valid_placement?(@submarine, ["A1", "A2"])).to eq(true)
@@ -77,7 +78,7 @@ RSpec.describe Board do
   end
 
   describe "#place" do
-    it "takes two arguments and updates the cell objects inside @cells" do 
+    xit "takes two arguments and updates the cell objects inside @cells" do 
       expect(@board.cells["A1"].empty?).to eq true
       expect(@board.cells["A2"].empty?).to eq true
       expect(@board.cells["A3"].empty?).to eq true
@@ -92,31 +93,31 @@ RSpec.describe Board do
   end
 
   describe "#render" do
-    it "renders empty board correctly" do 
+    xit "renders empty board correctly" do 
       expect(@board.render).to eq "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
     end 
 
-    it "renders board with ship correctly depending on boolean argument" do 
+    xit "renders board with ship correctly depending on boolean argument" do 
       @board.place(@cruiser, ["A1", "A2", "A3", "A4"])
       expect(@board.render).tp eq "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
       expect(@board.render(true)).to eq "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
     end 
 
-    it "renders board with miss correctly" do 
+    xit "renders board with miss correctly" do 
       @board.place(@cruiser, ["A1", "A2", "A3"])
       expect(@board.render).tp eq "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
       @board.cells["A4"].fire_upon 
       expect(@board.render).tp eq "  1 2 3 4 \nA . . . M \nB . . . . \nC . . . . \nD . . . . \n"
     end
 
-    it "renders board with hit correctly" do 
+    xit "renders board with hit correctly" do 
       @board.place(@cruiser, ["A1", "A2", "A3"])
       expect(@board.render).tp eq "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
       @board.cells["A3"].fire_upon 
       expect(@board.render).tp eq "  1 2 3 4 \nA . . H . \nB . . . . \nC . . . . \nD . . . . \n"
     end
 
-    it "renders board with sunk ship correctly" do 
+    xit "renders board with sunk ship correctly" do 
       @board.place(@cruiser, ["A1", "A2", "A3"])
       expect(@board.render).tp eq "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
       @board.cells["A3"].fire_upon 
