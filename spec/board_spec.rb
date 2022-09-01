@@ -40,20 +40,51 @@ RSpec.describe Board do
     end
   end
 
+  describe "#not_all_valid_coordinates?" do 
+    it "returns correct boolean value" do 
+      expect(@board.not_all_valid_coordinates?(["A1", "A2", "A3"])).to eq(false)
+      expect(@board.not_all_valid_coordinates?(["A1", "A2", "E1"])).to eq(true)
+    end
+  end
+
+  describe "#consecutive_letter?" do 
+    it "returns correct boolean value" do 
+      expect(@board.consecutive_letter?("A1", "B1")).to eq(true)
+      expect(@board.consecutive_letter?("A1", "A2")).to eq(false) 
+    end
+  end
+
+  describe "#consecutive_number?" do 
+    it "returns the correct boolean value" do 
+      expect(@board.consecutive_number?("A1", "A2")).to eq(true)
+      expect(@board.consecutive_number?("A1", "B1")).to eq(false) 
+    end
+  end
+
+  describe "#consecutive_cells?" do 
+    it "returns the correct boolean value" do 
+      expect(@board.consecutive_cells?(["A1", "A2"])).to eq(true) 
+      expect(@board.consecutive_cells?(["A1", "B2"])).to eq(false) 
+      expect(@board.consecutive_cells?(["B2", "B4"])).to eq(false) 
+      expect(@board.consecutive_cells?(["C3", "D4"])).to eq(false) 
+    end 
+  end
+
   describe "#valid_placement?" do
-    xit "takes two arguments, the ship object and array of coordinates" do
-      expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq true
+    it "takes two arguments, the ship object and array of coordinates" do
+      expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
     end
 
-    xit "requires ship length to equal coordinates length" do
+    it "requires ship length to equal coordinates length" do
       expect(@cruiser.length).to eq(3)
       expect(@board.valid_placement?(@cruiser, ["A1", "A2"])).to eq(false)
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
     end
 
-    xit "the coordinates are consecutive" do
+    it "the coordinates are consecutive" do
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
       expect(@board.valid_placement?(@cruiser, ["A1", "B1", "C1"])).to eq(true)
+      expect(@board.valid_placement?(@cruiser, ["C1", "B1", "A1"])).to eq(true)
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to eq(false)
       expect(@board.valid_placement?(@cruiser, ["A1", "B1", "D1"])).to eq(false)
     end
@@ -61,7 +92,7 @@ RSpec.describe Board do
     #   expect(@board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to eq(true)
     #   expect(@board.valid_placement?(cruiser, ["A3", "A2", "A1"])).to eq(false)
     # end
-    xit "the coordinates can't be diagonal" do
+    it "the coordinates can't be diagonal" do
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
       expect(@board.valid_placement?(@cruiser, ["A1", "B2", "C3"])).to eq(false)
     end
@@ -79,16 +110,16 @@ RSpec.describe Board do
 
   describe "#place" do
     xit "takes two arguments and updates the cell objects inside @cells" do 
-      expect(@board.cells["A1"].empty?).to eq true
-      expect(@board.cells["A2"].empty?).to eq true
-      expect(@board.cells["A3"].empty?).to eq true
+      expect(@board.cells["A1"].empty?).to eq(true)
+      expect(@board.cells["A2"].empty?).to eq(true)
+      expect(@board.cells["A3"].empty?).to eq(true)
       @board.place(@cruiser, ["A1", "A2", "A3"]) 
       expect(@board.cells["A1"].ship).to eq @cruiser
       expect(@board.cells["A2"].ship).to eq @cruiser 
       expect(@board.cells["A3"].ship).to eq @cruiser
-      expect(@board.cells["A1"].empty?).to eq false
-      expect(@board.cells["A2"].empty?).to eq false
-      expect(@board.cells["A3"].empty?).to eq false
+      expect(@board.cells["A1"].empty?).to eq(false)
+      expect(@board.cells["A2"].empty?).to eq(false)
+      expect(@board.cells["A3"].empty?).to eq(false)
     end
   end
 
