@@ -22,7 +22,9 @@ attr_accessor :cells
               "D3" => Cell.new("D3"),
               "D4" => Cell.new("D4")
               }
-
   end
 
+  def valid_coordinate?(coord)
+    @cells.keys.include?(coord)
+  end
 end

@@ -31,7 +31,7 @@ RSpec.describe Board do
   end
 
   describe "#valid_coordinate?" do
-    xit "returns true/false depending on whether arg is a valid coordinate on the board" do
+    it "returns true/false depending on whether arg is a valid coordinate on the board" do
       expect(@board.valid_coordinate?("A1")).to eq(true)
       expect(@board.valid_coordinate?("D4")).to eq(true)
       expect(@board.valid_coordinate?("A5")).to eq(false)
