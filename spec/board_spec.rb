@@ -62,8 +62,8 @@ RSpec.describe Board do
     #   expect(@board.valid_placement?(cruiser, ["A3", "A2", "A1"])).to eq(false)
     # end
     xit "the coordinates can't be diagonal" do
-      expect(@board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to eq(true)
-      expect(@board.valid_placement?(cruiser, ["A1", "B2", "C3"])).to eq(false)
+      expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
+      expect(@board.valid_placement?(@cruiser, ["A1", "B2", "C3"])).to eq(false)
     end
 
     xit "the coordinates can't overlap that of another ship" do
