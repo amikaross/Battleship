@@ -1,13 +1,18 @@
+require ".lib/board"
+
 class Game
   attr_reader
 
   def initialize
-    @player_board
-    @computer_board
+    @player_board = Board.new
+    @computer_board = Board.new
   end
 
   def main_menu
-    #a bunch of stuff will happen
+    #It should print "Welcome to BATTLESHIP, etc (see greeting)"
+    #Gets user input
+    #Has response for "p", for "q" or for "other text"
+
     if user_input == "p"
       computer_board_setup
       player_board_setup
@@ -16,6 +21,9 @@ class Game
   end
 
   def computer_board_setup
+    #have to create ships
+    comp_cruiser = Ship.new("Cruiser", 3)
+    comp_submarine = Ship.new("Submarine", 2)
   end
 
   def player_board_setup
@@ -41,7 +49,10 @@ class Game
   def game_over?
   end
 
-  def random_placement
+  def random_placement(board, ship)
+
+   #(supposed to give us coordinates)
+
   end
 
   def winner
@@ -49,4 +60,4 @@ class Game
 
   def board_display
   end
-end 
+end
