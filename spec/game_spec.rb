@@ -19,6 +19,12 @@ RSpec.describe Game do
     end
   end
 
+  describe "#play_game" do
+    it "" do
+
+    end
+  end
+
   describe "#player_board_setup" do
     it "" do
     end
