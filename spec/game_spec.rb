@@ -13,22 +13,22 @@ RSpec.describe Game do
       expect(@game).to be_an_instance_of(Game)
     end
 
-    it "each game has a computer-board and a player_board" do
+    it "each game has a computer-board and a player_board" do #AJP
 
     end
 
   end
 
-  describe "#main_menu" do
-    # it "can accept user input" do #don't need to test for iteration 3
-    # end
-
-    #my not be able to test, is all user input. Reassess later.
-  end
+  # describe "#main_menu" do
+  #   # it "can accept user input" do #don't need to test for iteration 3
+  #   # end
+  #
+  #   #my not be able to test, is all user input. Reassess later.
+  # end
 
   describe "#play_game" do
 
-    it "loop should continue until game is over" do
+    it "loop should continue until game is over" do #AJP
       #game_over? should be false
       #call @game.play_game
       #game_over? should be true
@@ -36,7 +36,7 @@ RSpec.describe Game do
   end
 
   describe "#player_board_setup" do
-    it "should add 2 ships to the board" do
+    it "should add 2 ships to the board" do #AJP
       # check that no cells are occupied (iterate through the hash of the
       # computer board to make sure they are empty)
       # game.computer_board_setup
@@ -45,7 +45,7 @@ RSpec.describe Game do
   end
 
   describe "#computer_board_setup" do
-    it "should add 2 ships to the board" do
+    it "should add 2 ships to the board" do #AJP
       # check that no cells are occupied (iterate through the hash of the
       # computer board to make sure they are empty)
       # game.computer_board_setup
@@ -58,7 +58,7 @@ RSpec.describe Game do
 
 
   describe "#random_placement" do
-    it "should return and array of valid coordinates" do
+    it "should return and array of valid coordinates" do #AR
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
       board = Board.new
@@ -67,7 +67,7 @@ RSpec.describe Game do
       # should be valid (board class method)
     end
 
-    it "has the correct number of coordinates compared to ship length" do
+    it "has the correct number of coordinates compared to ship length" do #AR
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
       board = Board.new
@@ -88,30 +88,30 @@ RSpec.describe Game do
   end
 
   describe "#game_over?" do
-    it "return true if both ships belonging to 1 player are sunk" do
+    it "return true if both ships belonging to 1 player are sunk" do #AJP
 
     end
 
-    it "return false if both ships belonging to 1 player are not sunk" do
-
-    end
-  end
-
-  describe "#end_game" do
-    #May not be able to test this, is terminal output
-    it "" do
+    it "return false if both ships belonging to 1 player are not sunk" do #AJP
 
     end
   end
+
+  # describe "#end_game" do
+  #   #May not be able to test this, is terminal output
+  #   it "" do
+  # 
+  #   end
+  # end
 
   describe "#winner" do
-    it "Will return the correct winner (player whose ships are not sunk)" do
+    it "Will return the correct winner (player whose ships are not sunk)" do #AR
 
     end
   end
 
   describe "#board_display" do
-    it "player can see their ships and not see computer ships" do
+    it "player can see their ships and not see computer ships" do #AR
 
     end
   end
