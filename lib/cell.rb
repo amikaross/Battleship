@@ -1,4 +1,4 @@
-require './lib/ship'
+require "./lib/ship"
 
 class Cell
   attr_reader :coordinate, :ship, :fired_upon
@@ -18,8 +18,8 @@ class Cell
     end
   end
 
-  def place_ship(ship_type)
-    @ship = ship_type
+  def place_ship(ship)
+    @ship = ship
   end
 
   def fire_upon
