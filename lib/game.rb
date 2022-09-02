@@ -44,6 +44,7 @@ class Game
   end
 
   def end_game
+    puts game.winner
   end
 
   def game_over?
@@ -56,8 +57,10 @@ class Game
   end
 
   def winner
+
   end
 
   def board_display
+
   end
 end
