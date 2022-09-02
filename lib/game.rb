@@ -16,6 +16,14 @@ class Game
     end
   end
 
+  def computer_board_setup
+  end
+
+  def player_board_setup
+  end
+
+  end
+
   def play_game
     until game_over?
       turn = Turn.new(@player_board, @computer_board)
@@ -30,7 +38,14 @@ class Game
     main_menu
   end
 
-  def random_placement
-
+  def end_game
   end
-end
+
+  def game_over?
+  end
+
+  def random_placement
+  end
+
+  def winner
+  end
