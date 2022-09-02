@@ -4,7 +4,6 @@ class Game
   def initialize
     @player_board
     @computer_board
-
   end
 
   def main_menu
@@ -22,12 +21,10 @@ class Game
   def player_board_setup
   end
 
-  end
-
   def play_game
     until game_over?
       turn = Turn.new(@player_board, @computer_board)
-      puts turn.display_boards
+      puts display_boards
       @computer_board = turn.player_shot
       @player_board = turn.computer_shot
       # @player_board = turn.update_player_board
@@ -49,3 +46,7 @@ class Game
 
   def winner
   end
+
+  def board_display
+  end
+end 

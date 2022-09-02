@@ -60,4 +60,10 @@ RSpec.describe Game do
     end
   end
 
+  describe "#board_display" do 
+    it "" do 
+      
+    end
+  end
+
 end
