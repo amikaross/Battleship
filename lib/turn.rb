@@ -8,4 +8,13 @@ class Turn
     @player_board = player_board
     @computer_board = computer_board 
   end
+
+  def player_shot 
+  end
+
+  def computer_shot
+  end
+
+  def results
+  end
 end

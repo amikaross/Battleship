@@ -13,4 +13,22 @@ RSpec.describe Turn do
       expect(@turn).to be_an_instance_of(Turn)
     end
   end
+
+  describe "#player_shot" do 
+    it "" do 
+
+    end
+  end
+
+  describe "#computer_shot" do 
+    it "" do 
+
+    end
+  end
+
+  describe "#results" do 
+    it "" do 
+
+    end
+  end
 end
