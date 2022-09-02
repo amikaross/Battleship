@@ -35,7 +35,7 @@ attr_accessor :cells
   def consecutive_letter?(coord1, coord2)
     coord1[0].ord == coord2[0].ord + 1 || coord1[0].ord == coord2[0].ord - 1
   end
-  
+
   def consecutive_number?(coord1, coord2)
     coord1[1].ord == coord2[1].ord + 1 || coord1[1].ord == coord2[1].ord - 1
   end
@@ -46,39 +46,63 @@ attr_accessor :cells
     if coord1[0] == coord2[0] && consecutive_number?(coord1, coord2)
       true
     elsif coord1[1] == coord2[1] && consecutive_letter?(coord1, coord2)
-      true 
-    else 
+      true
+    else
       false
-    end 
+    end
   end
 
   def all_consecutive?(coord_array)
     coord_array.each_cons(2) do |coord_pair|
-      if consecutive_cells?(coord_pair) == false 
+      if consecutive_cells?(coord_pair) == false
         return false
       end
     end
-    true 
+    true
   end
 
   def ship_present?(coord_array)
     coord_array.each do |coord|
       if @cells[coord].ship != nil
-        return true 
+        return true
       end
     end
-    false 
+    false
   end
 
   def valid_placement?(ship, coord_array)
     if ship.length != coord_array.length || not_all_valid_coordinates?(coord_array)
-      false 
-    elsif all_consecutive?(coord_array) == false
-      false 
-    elsif ship_present?(coord_array) 
       false
-    else 
+    elsif all_consecutive?(coord_array) == false
+      false
+    elsif ship_present?(coord_array)
+      false
+    else
       true
+    end
+  end
+
+  def place(ship, coord_array)
+    #will just place the ship on the board, the valid_placement method will do the checking
+    coord_array.each do |coord|
+      @cells[coord].place_ship(ship)
+    end
+  end
+
+  def render(ship_shows = false)
+      #return value has to be a string and it has to have a certain number of spaces to keep the board in figure
+    if ship_shows == false
+      "  1 2 3 4 \n" +
+      "A #{@cells["A1"].render} #{@cells["A2"].render} #{@cells["A3"].render} #{@cells["A4"].render} \n" +
+      "B #{@cells["B1"].render} #{@cells["B2"].render} #{@cells["B3"].render} #{@cells["B4"].render} \n" +
+      "C #{@cells["C1"].render} #{@cells["C2"].render} #{@cells["C3"].render} #{@cells["C4"].render} \n" +
+      "D #{@cells["D1"].render} #{@cells["D2"].render} #{@cells["D3"].render} #{@cells["D4"].render} \n"
+    else
+      "  1 2 3 4 \n" +
+      "A #{@cells["A1"].render(true)} #{@cells["A2"].render(true)} #{@cells["A3"].render(true)} #{@cells["A4"].render(true)} \n" +
+      "B #{@cells["B1"].render(true)} #{@cells["B2"].render(true)} #{@cells["B3"].render(true)} #{@cells["B4"].render(true)} \n" +
+      "C #{@cells["C1"].render(true)} #{@cells["C2"].render(true)} #{@cells["C3"].render(true)} #{@cells["C4"].render(true)} \n" +
+      "D #{@cells["D1"].render(true)} #{@cells["D2"].render(true)} #{@cells["D3"].render(true)} #{@cells["D4"].render(true)} \n"
     end
   end
 end

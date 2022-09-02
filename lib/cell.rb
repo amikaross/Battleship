@@ -37,10 +37,10 @@ class Cell
     end
   end
 
-  def render(ship_present = false)
+  def render(ship_shows = false)
     #consider using or in addition to and, at that point order will matter
     if fired_upon? == false && empty? == false
-      if ship_present == true
+      if ship_shows == true
         "S"
       else
         "."
