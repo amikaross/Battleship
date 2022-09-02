@@ -88,25 +88,30 @@ RSpec.describe Game do
   end
 
   describe "#game_over?" do
-    it "" do
+    it "return true if both ships belonging to 1 player are sunk" do
+
+    end
+
+    it "return false if both ships belonging to 1 player are not sunk" do
 
     end
   end
 
   describe "#end_game" do
+    #May not be able to test this, is terminal output
     it "" do
 
     end
   end
 
   describe "#winner" do
-    it "" do
+    it "Will return the correct winner (player whose ships are not sunk)" do
 
     end
   end
 
   describe "#board_display" do
-    it "" do
+    it "player can see their ships and not see computer ships" do
 
     end
   end
