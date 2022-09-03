@@ -6,7 +6,7 @@ RSpec.describe Game do
     @game = Game.new
   end
 
-  xdescribe "#initialize" do #AJP
+  describe "#initialize" do #AJP
     it "exists" do
       expect(@game).to be_an_instance_of(Game)
     end
@@ -34,14 +34,14 @@ RSpec.describe Game do
 
   xdescribe "#player_board_setup" do #AJP
     it "should add 2 ships to the board" do
-      expect(@player_board.cells.values.all? { |cell| cell.empty? }).to eq(true)
+      expect(@game.player_board.cells.values.all? { |cell| cell.empty? }).to eq(true)
       @game.player_board_setup
-      expect(@player_board.cells.values.all? { |cell| cell.empty? }).to eq(false)
-      expect(@player_board.cells.values.count { |cell| cell.empty? == false }).to eq(5)
+      expect(@game.player_board.cells.values.all? { |cell| cell.empty? }).to eq(false)
+      expect(@game.player_board.cells.values.count { |cell| cell.empty? == false }).to eq(5)
     end
   end
 
-  xdescribe "#computer_board_setup" do #AJP
+  describe "#computer_board_setup" do #AJP
     it "should add 2 ships to the board" do #AJP
       expect(@game.computer_board.cells.values.all? { |cell| cell.empty? }).to eq(true)
       @game.computer_board_setup
@@ -72,7 +72,7 @@ RSpec.describe Game do
     end
   end
 
-  xdescribe "#game_over?" do #AJP
+  describe "#game_over?" do #AJP
     it "return true only if both ships belonging to 1 player are sunk" do
       expect(@game.game_over?).to eq(false)
       3.times { @game.player_cruiser.hit }
@@ -116,11 +116,7 @@ RSpec.describe Game do
     end
   end
 
-<<<<<<< HEAD
-  xdescribe "#winner" do #AR
-=======
   describe "#winner" do
->>>>>>> main
     it "Will return the correct string ('You') if computer's ships have sunk" do
       @game.player_board.place(@game.player_cruiser, ["A1", "A2", "A3"])
       @game.player_board.place(@game.player_submarine, ["B1", "B2"])
@@ -152,16 +148,12 @@ RSpec.describe Game do
     end
   end
 
-<<<<<<< HEAD
-  describe "#board_display" do #AR
-=======
-  xdescribe "#board_display" do
->>>>>>> main
+  describe "#board_display" do
     it "displays player ships but not computer ships" do
-      @game.player_board.place(@game.player_cruiser, [A1, A2, A3])
-      @game.player_board.place(@game.player_submarine, [B1, B2])
-      @game.computer_board.place(@game.computer_cruiser, [A1, A2, A3])
-      @game.computer_board.place(@game.computer_submarine, [B1, B2])
+      @game.player_board.place(@game.player_cruiser, ["A1", "A2", "A3"])
+      @game.player_board.place(@game.player_submarine, ["B1", "B2"])
+      @game.computer_board.place(@game.computer_cruiser, ["A1", "A2", "A3"])
+      @game.computer_board.place(@game.computer_submarine, ["B1", "B2"])
       expect(@game.board_display).to eq "=============COMPUTER BOARD=============\n" +
                                         "  1 2 3 4 \n" +
                                         "A . . . . \n" +
@@ -176,3 +168,4 @@ RSpec.describe Game do
                                         "D . . . . \n"
     end
   end
+end
