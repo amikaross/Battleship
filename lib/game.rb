@@ -1,7 +1,13 @@
-require ".lib/board"
+require "./lib/board"
+require "./lib/turn"
 
 class Game
-  attr_reader
+  attr_reader :player_board,
+              :computer_board,
+              :player_cruiser,
+              :player_submarine,
+              :computer_cruiser,
+              :computer_submarine
 
   def initialize
     @player_board = Board.new
@@ -12,20 +18,11 @@ class Game
     @computer_submarine = Ship.new("Computer_submarine", 2)
   end
 
-  def main_menu #AJP
-    #It should print "Welcome to BATTLESHIP, etc (see greeting)"
-    #Gets user input
-    #Has response for "p", for "q" or for "other text"
-
-    if user_input == "p"
-      computer_board_setup
-      player_board_setup
-      play_game
-    end
-  end
-
   def computer_board_setup #AR
-
+    cruiser_placement = random_placement(@computer_board, @computer_cruiser)
+    @computer_board.place(@computer_cruiser, cruiser_placement)
+    sub_placement = random_placement(@computer_board, @computer_submarine)
+    @computer_board.place(@computer_submarine, sub_placement)
   end
 
   def player_board_setup #AJP
@@ -62,10 +59,23 @@ class Game
     @computer_cruiser.sunk? && @computer_submarine.sunk?
   end
 
-  def random_placement(board, ship) #AR
+  def random_placement(board, ship)
+    randomly_rotated_cells = unoccupied_cells(board).rotate(rand(unoccupied_cells(board).length))
+    randomly_rotated_cells.each_cons(ship.length) do |coord_array|
+      if board.valid_placement?(ship, coord_array)
+        return coord_array
+      end
+    end
+  end
 
-   #(supposed to give us coordinates)
-
+  def unoccupied_cells(board)
+    unoccupied_cells = []
+    board.cells.each do |coord, cell_object|
+      if cell_object.empty?  
+        unoccupied_cells << coord 
+      end
+    end
+    unoccupied_cells
   end
 
   def winner
