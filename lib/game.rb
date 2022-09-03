@@ -27,6 +27,9 @@ class Game
   end
 
   def player_board_setup
+    #have to create ships
+    player_cruier = Ship.new("Cruiser", 3)
+    player_submarine = Ship.new("Submarine", 2)
   end
 
   def play_game

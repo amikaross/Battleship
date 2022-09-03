@@ -62,16 +62,16 @@ RSpec.describe Game do
     it "should return and array of valid coordinates" do
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
-      coord_array = @game.random_placement(@board, cruiser)
+      coord_array = @game.random_placement(@bcomputer_board, cruiser)
       coord_array.each do |coord|
-        expect(@board.valid_coordinate(coord)).to eq(true)
+        expect(@computer_board.valid_coordinate(coord)).to eq(true)
       end
     end
 
     it "has the correct number of coordinates compared to ship length" do
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
-      coord_array = @game.random_placement(@board, cruiser)
+      coord_array = @game.random_placement(@computer_board, cruiser)
       expect(coord_array.length).to eq cruiser.length
     end
 
@@ -79,9 +79,9 @@ RSpec.describe Game do
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
       coord_array = @game.random_placement(board, cruiser)
-      expect(@board.valid_placement?(cruiser, coord_array)).to eq(true)
-      @board.place(cruiser, coord_array)
-      coord_array2 = @game.random_placement(@board, submarine)
+      expect(@computer_board.valid_placement?(cruiser, coord_array)).to eq(true)
+      @computer_board.place(cruiser, coord_array)
+      coord_array2 = @game.random_placement(@computer_board, submarine)
       expect(board.valid_placement?(submarine, coord_array2)).to eq(true)
     end
   end
@@ -104,15 +104,63 @@ RSpec.describe Game do
   # end
 
   describe "#winner" do
-    it "Will return the correct winner (player whose ships are not sunk)" do #AR
+    it "Will return the correct string ('You') if computer's ships have sunk" do 
+      comp_cruiser = Ship.new("Comp cruiser", 3)
+      comp_sub = Ship.new("Comp sub", 2)
+      player_cruiser = Ship.new("Player cruiser", 3)
+      player_sub = Ship.new("Player sub", 2)
+      @player_board.place(player_cruiser, [A1, A2, A3])
+      @player_board.place(player_sub, [B1, B2])
+      @computer_board.place(comp_cruiser, [A1, A2, A3])
+      @computer_board.place(comp_sub, [B1, B2])
+      @computer_board.cells["A1"].fire_upon
+      @computer_board.cells["A2"].fire_upon
+      @computer_board.cells["A3"].fire_upon
+      @computer_board.cells["A4"].fire_upon
+      @computer_board.cells["A5"].fire_upon
+      expect(@game.winner).to eq("You")
+    end
 
+    it "Will return the correct string ('I') if player's ships have sunk" do 
+      comp_cruiser = Ship.new("Comp cruiser", 3)
+      comp_sub = Ship.new("Comp sub", 2)
+      player_cruiser = Ship.new("Player cruiser", 3)
+      player_sub = Ship.new("Player sub", 2)
+      @player_board.place(player_cruiser, [A1, A2, A3])
+      @player_board.place(player_sub, [B1, B2])
+      @computer_board.place(comp_cruiser, [A1, A2, A3])
+      @computer_board.place(comp_sub, [B1, B2])
+      @player_board.cells["A1"].fire_upon
+      @player_board.cells["A2"].fire_upon
+      @player_board.cells["A3"].fire_upon
+      @player_board.cells["A4"].fire_upon
+      @player_board.cells["A5"].fire_upon
+      expect(@game.winner).to eq("I")
     end
   end
 
   describe "#board_display" do
-    it "player can see their ships and not see computer ships" do #AR
-
+    it "displays player ships but not computer ships" do
+      comp_cruiser = Ship.new("Comp cruiser", 3)
+      comp_sub = Ship.new("Comp sub", 2)
+      player_cruiser = Ship.new("Player cruiser", 3)
+      player_sub = Ship.new("Player sub", 2)
+      @player_board.place(player_cruiser, [A1, A2, A3])
+      @player_board.place(player_sub, [B1, B2])
+      @computer_board.place(comp_cruiser, [A1, A2, A3])
+      @computer_board.place(comp_sub, [B1, B2])
+      expect(@game.board_display).to eq "=============COMPUTER BOARD=============\n" +
+                                        "  1 2 3 4 \n" +
+                                        "A . . . . \n" +
+                                        "B . . . . \n" +
+                                        "C . . . . \n" +
+                                        "D . . . . \n" +
+                                        "==============PlAYER BOARD==============\n" +
+                                        "  1 2 3 4 \n" +
+                                        "A S S S . \n" +
+                                        "B S S . . \n" +
+                                        "C . . . . \n" +
+                                        "D . . . . \n"
     end
   end
-
 end
