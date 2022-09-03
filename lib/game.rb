@@ -18,7 +18,7 @@ class Game
     @computer_submarine = Ship.new("Computer_submarine", 2)
   end
 
-  def computer_board_setup #AR
+  def computer_board_setup
     cruiser_placement = random_placement(@computer_board, @computer_cruiser)
     @computer_board.place(@computer_cruiser, cruiser_placement)
     sub_placement = random_placement(@computer_board, @computer_submarine)
@@ -26,10 +26,35 @@ class Game
   end
 
   def player_board_setup
-    puts "Place your cruiser on the board. You will need 3 coordinates."
-    puts "Cruiser placement: (ex. A1, A2, A3)"
-    cruiser_placement = [gets.chomp]
-    coordinates
+    print "I have laid out my ships on the grid.\n"+
+"You now need to lay out your two ships.\n"
+"The Cruiser is three units long and the Submarine is two units long.\n" +
+"  1 2 3 4 \n" +
+"A . . . . \n" +
+"B . . . . \n" +
+"C . . . . \n" +
+"D . . . . \n" +
+"Enter the squares for the Cruiser (3 spaces, ex. A1 A2 A3):\n" +
+">"
+    cruiser_coord_array = gets.chomp.upcase.split
+    until @player_board.valid_placement?(@player_cruiser, cruiser_coord_array)
+      print "Those are invalid coordinates. Please try again:\n" +
+      ">"
+      cruiser_coord_array = gets.chomp.upcase.split
+    end
+    @player_board.place(@player_cruiser, cruiser_coord_array)
+    print @player_board.render(ship_shows = true)"\n" +
+    "Enter the squares for the Submarine (2 spaces, ex. B1 B2):\n" +
+    ">"
+    submarine_coord_array = gets.chomp.upcase.split
+    until @player_board.valid_placement?(@player_submarine, submarine_coord_array)
+      print "Those are invalid coordinates. Please try again:\n" +
+      ">"
+      submarine_coord_array = gets.chomp.upcase.split
+      @player_board.place(@player_submarine, submarine_coord_array)
+      print @player_board.render(ship_shows = true)"\n"
+    end
+
     #Take input, check through valid input, if so place ship if not new message
     #update the boards to place the ships (place is a board method)
 
@@ -48,7 +73,7 @@ class Game
 
   def end_game #done
     puts "#{winner} won!"
-    
+
   end
 
   def game_over?
@@ -75,8 +100,8 @@ class Game
   def unoccupied_cells(board)
     unoccupied_cells = []
     board.cells.each do |coord, cell_object|
-      if cell_object.empty?  
-        unoccupied_cells << coord 
+      if cell_object.empty?
+        unoccupied_cells << coord
       end
     end
     unoccupied_cells
