@@ -27,15 +27,15 @@ class Game
 
   def player_board_setup
     print "I have laid out my ships on the grid.\n"+
-"You now need to lay out your two ships.\n"
-"The Cruiser is three units long and the Submarine is two units long.\n" +
-"  1 2 3 4 \n" +
-"A . . . . \n" +
-"B . . . . \n" +
-"C . . . . \n" +
-"D . . . . \n" +
-"Enter the squares for the Cruiser (3 spaces, ex. A1 A2 A3):\n" +
-">"
+          "You now need to lay out your two ships.\n" +
+          "The Cruiser is three units long and the Submarine is two units long.\n" +
+          "  1 2 3 4 \n" +
+          "A . . . . \n" +
+          "B . . . . \n" +
+          "C . . . . \n" +
+          "D . . . . \n" +
+          "Enter the squares for the Cruiser (3 spaces, ex. A1 A2 A3):\n" +
+          ">"
     cruiser_coord_array = gets.chomp.upcase.split
     until @player_board.valid_placement?(@player_cruiser, cruiser_coord_array)
       print "Those are invalid coordinates. Please try again:\n" +
@@ -43,7 +43,7 @@ class Game
       cruiser_coord_array = gets.chomp.upcase.split
     end
     @player_board.place(@player_cruiser, cruiser_coord_array)
-    print @player_board.render(ship_shows = true)"\n" +
+    print @player_board.render(ship_shows = true)
     "Enter the squares for the Submarine (2 spaces, ex. B1 B2):\n" +
     ">"
     submarine_coord_array = gets.chomp.upcase.split
@@ -51,16 +51,12 @@ class Game
       print "Those are invalid coordinates. Please try again:\n" +
       ">"
       submarine_coord_array = gets.chomp.upcase.split
-      @player_board.place(@player_submarine, submarine_coord_array)
-      print @player_board.render(ship_shows = true)"\n"
     end
-
-    #Take input, check through valid input, if so place ship if not new message
-    #update the boards to place the ships (place is a board method)
-
+    @player_board.place(@player_submarine, submarine_coord_array)
+    print @player_board.render(ship_shows = true)
   end
 
-  def play_game #should be done
+  def play_game
     until game_over?
       turn = Turn.new(@player_board, @computer_board)
       puts board_display
@@ -71,7 +67,7 @@ class Game
     end_game
   end
 
-  def end_game #done
+  def end_game
     puts "#{winner} won!"
 
   end
@@ -115,8 +111,10 @@ class Game
     end
   end
 
-  def board_display #AJP
-    #You have all of the little methods (board.render) that will help write the tests
-
+  def board_display
+    print "=============COMPUTER BOARD=============\n" +
+          @computer_board.render
+          "==============PlAYER BOARD==============\n" +
+          @player_board.render(ship_shows = true)
   end
 end
