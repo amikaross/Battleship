@@ -4,8 +4,9 @@ require "./lib/game"
 RSpec.describe Game do
 
   before(:each) do
-    @game = Game.new
-
+    @player_board = Board.new
+    @computer_board = Board.new
+    @game = Game.new(@player_board, @computer_board)
   end
 
   describe "#initialize" do
@@ -58,31 +59,29 @@ RSpec.describe Game do
 
 
   describe "#random_placement" do
-    it "should return and array of valid coordinates" do #AR
+    it "should return and array of valid coordinates" do
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
-      board = Board.new
-
-      # expect if you iterate through the array all of the coordinates
-      # should be valid (board class method)
+      coord_array = @game.random_placement(@board, cruiser)
+      coord_array.each do |coord|
+        expect(@board.valid_coordinate(coord)).to eq(true)
+      end
     end
 
-    it "has the correct number of coordinates compared to ship length" do #AR
+    it "has the correct number of coordinates compared to ship length" do
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
-      board = Board.new
-
-    #expect array return length to = the ship length
+      coord_array = @game.random_placement(@board, cruiser)
+      expect(coord_array.length).to eq cruiser.length
     end
 
     it "gives a valid placement" do
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
-      board = Board.new
-      coord_array = random_placement(board, cruiser)
-      expect(board.valid_placement?(cruiser, coord_array)).to eq(true)
-      board.place(cruiser, coord_array)
-      coord_array2 = random_placement(board, submarine)
+      coord_array = @game.random_placement(board, cruiser)
+      expect(@board.valid_placement?(cruiser, coord_array)).to eq(true)
+      @board.place(cruiser, coord_array)
+      coord_array2 = @game.random_placement(@board, submarine)
       expect(board.valid_placement?(submarine, coord_array2)).to eq(true)
     end
   end
