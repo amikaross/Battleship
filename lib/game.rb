@@ -39,8 +39,10 @@ class Game
     until game_over?
       turn = Turn.new(@player_board, @computer_board)
       puts board_display
-      @computer_board = turn.player_shot
-      @player_board = turn.computer_shot
+      player_shot = turn.get_player_shot
+      computer_shot = turn.random_shot
+      @computer_board = turn.player_fires(player_shot)
+      @player_board = turn.computer_fires(computer_shot)
       puts turn.results
     end
     end_game

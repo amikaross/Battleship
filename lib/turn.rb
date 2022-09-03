@@ -7,16 +7,22 @@ class Turn
   def initialize(player_board, computer_board)
     @player_board = player_board
     @computer_board = computer_board
-    @player_shot = player_shot
-    @computer_shot = computer_shot
   end
 
-  def player_shot(coordinate)
+  def player_fires(player_shot)
 
   end
 
-  def computer_shot(coordinate)
+  def computer_fires(random_shot)
     # will have to come up with random coordinate
+  end
+
+  def get_player_shot
+    
+  end
+
+  def random_shot
+    
   end
 
   def results
