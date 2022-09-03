@@ -51,11 +51,6 @@ RSpec.describe Game do
     end
   end
 
-    # it "doesn't allow invalid ship placement" do #address later
-    #   #expect that ()
-    # end
-  end
-
   describe "#random_placement" do #AR
     it "should return and array of valid coordinates" do
       coord_array = @game.random_placement(@game.computer_board, @game.computer_cruiser)
