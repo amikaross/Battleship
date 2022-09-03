@@ -85,13 +85,35 @@ RSpec.describe Game do
     end
   end
 
-  xdescribe "#computer_won?" do #AR
-    it "" do
+  describe "#computer_won?" do #AR
+    it "returns true only if both player's ships are sunk" do
+      @game.player_board.place(@game.player_cruiser, ["A1", "A2", "A3"])
+      @game.player_board.place(@game.player_submarine, ["B1", "B2"])
+      @game.computer_board.place(@game.computer_cruiser, ["A1", "A2", "A3"])
+      @game.computer_board.place(@game.computer_submarine, ["B1", "B2"])
+      @game.player_board.cells["A1"].fire_upon
+      @game.player_board.cells["A2"].fire_upon
+      @game.player_board.cells["A3"].fire_upon
+      expect(@game.computer_won?).to eq(false)
+      @game.player_board.cells["B1"].fire_upon
+      @game.player_board.cells["B2"].fire_upon
+      expect(@game.computer_won?).to eq(true)
     end
   end
 
-  xdescribe "#player_won?" do #AR
-    it "" do
+  describe "#player_won?" do #AR
+    it "returns true only if both computer's ships are sunk" do
+      @game.player_board.place(@game.player_cruiser, ["A1", "A2", "A3"])
+      @game.player_board.place(@game.player_submarine, ["B1", "B2"])
+      @game.computer_board.place(@game.computer_cruiser, ["A1", "A2", "A3"])
+      @game.computer_board.place(@game.computer_submarine, ["B1", "B2"])
+      @game.computer_board.cells["A1"].fire_upon
+      @game.computer_board.cells["A2"].fire_upon
+      @game.computer_board.cells["A3"].fire_upon
+      expect(@game.player_won?).to eq(false)
+      @game.computer_board.cells["B1"].fire_upon
+      @game.computer_board.cells["B2"].fire_upon
+      expect(@game.player_won?).to eq(true)
     end
   end
 
@@ -121,6 +143,8 @@ RSpec.describe Game do
       @game.player_board.cells["A3"].fire_upon
       @game.player_board.cells["B1"].fire_upon
       @game.player_board.cells["B2"].fire_upon
+      expect(@game.player_cruiser.sunk?).to eq(true)
+      expect(@game.player_submarine.sunk?).to eq(true)
       expect(@game.winner).to eq("I")
     end
   end

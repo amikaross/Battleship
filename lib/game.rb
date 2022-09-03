@@ -18,7 +18,7 @@ class Game
     @computer_submarine = Ship.new("Computer_submarine", 2)
   end
 
-  def computer_board_setup #AR
+  def computer_board_setup
     cruiser_placement = random_placement(@computer_board, @computer_cruiser)
     @computer_board.place(@computer_cruiser, cruiser_placement)
     sub_placement = random_placement(@computer_board, @computer_submarine)
@@ -35,7 +35,7 @@ class Game
 
   end
 
-  def play_game #should be done
+  def play_game
     until game_over?
       turn = Turn.new(@player_board, @computer_board)
       puts board_display
@@ -46,9 +46,8 @@ class Game
     end_game
   end
 
-  def end_game #done
+  def end_game
     puts "#{winner} won!"
-    
   end
 
   def game_over?
