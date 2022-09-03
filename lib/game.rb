@@ -25,7 +25,11 @@ class Game
     @computer_board.place(@computer_submarine, sub_placement)
   end
 
-  def player_board_setup #AJP
+  def player_board_setup
+    puts "Place your cruiser on the board. You will need 3 coordinates."
+    puts "Cruiser placement: (ex. A1, A2, A3)"
+    cruiser_placement = [gets.chomp]
+    coordinates
     #Take input, check through valid input, if so place ship if not new message
     #update the boards to place the ships (place is a board method)
 
@@ -40,11 +44,11 @@ class Game
       puts turn.results
     end
     end_game
-    main_menu
   end
 
   def end_game #done
     puts "#{winner} won!"
+    
   end
 
   def game_over?
