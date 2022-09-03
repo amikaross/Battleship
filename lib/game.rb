@@ -1,4 +1,5 @@
 require "./lib/board"
+require "./lib/turn"
 
 class Game
   attr_reader :player_board,

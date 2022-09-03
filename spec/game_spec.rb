@@ -4,8 +4,6 @@ require "./lib/game"
 RSpec.describe Game do
 
   before(:each) do
-    # @player_board = Board.new
-    # @computer_board = Board.new
     @game = Game.new
   end
 
@@ -18,17 +16,21 @@ RSpec.describe Game do
       expect(@game.player_board).to be_an_instance_of(Board)
       expect(@game.computer_board).to be_an_instance_of(Board)
     end
+
+    it "each game has two ships for the player and two for the computer" do 
+      expect(@game.player_cruiser).to be_an_instance_of(Ship)
+      expect(@game.player_submarine).to be_an_instance_of(Ship)
+      expect(@game.computer_cruiser).to be_an_instance_of(Ship)
+      expect(@game.computer_submarine).to be_an_instance_of(Ship)
+    end
   end
 
   # describe "#main_menu" do
-  #   # it "can accept user input" do #don't need to test for iteration 3
-  #   # end
-  #
-  #   #my not be able to test, is all user input. Reassess later.
+  #   #may not be able to test, is all user input. Reassess later.
   # end
 
   xdescribe "#play_game" do #AJP
-    it "loop should continue until game is over" do
+    it "should loop should continue until the game is over" do
       expect(@game.game_over?).to eq(false)
       @game.play_game
       expect(@game.game_over?).to eq(true)
