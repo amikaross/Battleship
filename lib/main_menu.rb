@@ -1,3 +1,5 @@
+require "./lib/game"
+
 class MainMenu
 
   def display #AJP
@@ -18,3 +20,5 @@ class MainMenu
     end
   end
 end
+
+# Don't think we can test this, so did not make a spec file.
