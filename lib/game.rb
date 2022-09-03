@@ -69,7 +69,6 @@ class Game
 
   def end_game
     puts "#{winner} won!"
-
   end
 
   def game_over?
