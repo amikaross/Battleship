@@ -2,7 +2,6 @@ require "rspec"
 require "./lib/game"
 
 RSpec.describe Game do
-
   before(:each) do
     @game = Game.new
   end
@@ -117,7 +116,7 @@ RSpec.describe Game do
     end
   end
 
-  describe "#winner" do #AR
+  describe "#winner" do
     it "Will return the correct string ('You') if computer's ships have sunk" do
       @game.player_board.place(@game.player_cruiser, ["A1", "A2", "A3"])
       @game.player_board.place(@game.player_submarine, ["B1", "B2"])
@@ -133,7 +132,7 @@ RSpec.describe Game do
       expect(@game.winner).to eq("You")
     end
 
-    it "Will return the correct string ('I') if player's ships have sunk" do #AR
+    it "Will return the correct string ('I') if player's ships have sunk" do
       @game.player_board.place(@game.player_cruiser, ["A1", "A2", "A3"])
       @game.player_board.place(@game.player_submarine, ["B1", "B2"])
       @game.computer_board.place(@game.computer_cruiser, ["A1", "A2", "A3"])
@@ -149,7 +148,7 @@ RSpec.describe Game do
     end
   end
 
-  xdescribe "#board_display" do #AR
+  xdescribe "#board_display" do
     it "displays player ships but not computer ships" do
       @game.player_board.place(@game.player_cruiser, [A1, A2, A3])
       @game.player_board.place(@game.player_submarine, [B1, B2])
