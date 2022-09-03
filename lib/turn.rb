@@ -1,4 +1,4 @@
-require './lib/board'
+require "./lib/board"
 
 class Turn
   attr_reader :player_board,
@@ -11,10 +11,11 @@ class Turn
     @computer_shot = computer_shot
   end
 
-  def player_shot
+  def player_shot(coordinate)
+
   end
 
-  def computer_shot
+  def computer_shot(coordinate)
     # will have to come up with random coordinate
   end
 
