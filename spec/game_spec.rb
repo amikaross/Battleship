@@ -52,6 +52,7 @@ RSpec.describe Game do
       expect(@computer_board.cells.values.all? { |cell| cell.empty? }).to eq(false)
       expect(@computer_board.cells.values.count { |cell| cell.empty? == false }).to eq(5)
     end
+  end
 
     # it "doesn't allow invalid ship placement" do #address later
     #   #expect that ()
