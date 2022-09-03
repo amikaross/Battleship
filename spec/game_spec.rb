@@ -4,18 +4,19 @@ require "./lib/game"
 RSpec.describe Game do
 
   before(:each) do
-    @player_board = Board.new
-    @computer_board = Board.new
-    @game = Game.new(@player_board, @computer_board)
+    # @player_board = Board.new
+    # @computer_board = Board.new
+    @game = Game.new
   end
 
-  describe "#initialize" do
+  describe "#initialize" do #AJP
     it "exists" do
       expect(@game).to be_an_instance_of(Game)
     end
 
     it "each game has a computer-board and a player_board" do #AJP
-
+      expect(@game.player_board).to be_an_instance_of(Board)
+      expect(@game.computer_board).to be_an_instance_of(Board)
     end
 
   end
@@ -27,30 +28,29 @@ RSpec.describe Game do
   #   #my not be able to test, is all user input. Reassess later.
   # end
 
-  describe "#play_game" do
-
-    it "loop should continue until game is over" do #AJP
-      #game_over? should be false
-      #call @game.play_game
-      #game_over? should be true
+  describe "#play_game" do #AJP
+    it "loop should continue until game is over" do
+      expect(@game.game_over?).to eq(false)
+      @game.play_game
+      expect(@game.game_over?).to eq(true)
     end
   end
 
-  describe "#player_board_setup" do
-    it "should add 2 ships to the board" do #AJP
-      # check that no cells are occupied (iterate through the hash of the
-      # computer board to make sure they are empty)
-      # game.computer_board_setup
-      # check that 5 cells are occupied
+  describe "#player_board_setup" do #AJP
+    it "should add 2 ships to the board" do
+      expect(@player_board.cells.values.all? { |cell| cell.empty? }).to eq(true)
+      @game.player_board_setup
+      expect(@player_board.cells.values.all? { |cell| cell.empty? }).to eq(false)
+      expect(@player_board.cells.values.count { |cell| cell.empty? == false }).to eq(5)
     end
   end
 
-  describe "#computer_board_setup" do
+  describe "#computer_board_setup" do #AJP
     it "should add 2 ships to the board" do #AJP
-      # check that no cells are occupied (iterate through the hash of the
-      # computer board to make sure they are empty)
-      # game.computer_board_setup
-      # check that 5 cells are occupied
+      expect(@computer_board.cells.values.all? { |cell| cell.empty? }).to eq(true)
+      @game.computer_board_setup
+      expect(@computer_board.cells.values.all? { |cell| cell.empty? }).to eq(false)
+      expect(@computer_board.cells.values.count { |cell| cell.empty? == false }).to eq(5)
     end
 
     # it "doesn't allow invalid ship placement" do #address later
@@ -58,7 +58,7 @@ RSpec.describe Game do
     # end
 
 
-  describe "#random_placement" do
+  describe "#random_placement" do #AR
     it "should return and array of valid coordinates" do
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
@@ -68,14 +68,14 @@ RSpec.describe Game do
       end
     end
 
-    it "has the correct number of coordinates compared to ship length" do
+    it "has the correct number of coordinates compared to ship length" do #AR
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
       coord_array = @game.random_placement(@computer_board, cruiser)
       expect(coord_array.length).to eq cruiser.length
     end
 
-    it "gives a valid placement" do
+    it "gives a valid placement" do #AR
       cruiser = Ship.new("Cruiser", 3)
       submarine = Ship.new("Submarine", 2)
       coord_array = @game.random_placement(board, cruiser)
@@ -86,25 +86,32 @@ RSpec.describe Game do
     end
   end
 
-  describe "#game_over?" do
-    it "return true if both ships belonging to 1 player are sunk" do #AJP
-
-    end
-
-    it "return false if both ships belonging to 1 player are not sunk" do #AJP
-
+  describe "#game_over?" do #AJP
+    it "return true only if both ships belonging to 1 player are sunk" do
+      expect(@game.game_over?).to eq(false)
+      3.times { @game.player_cruiser.hit }
+      expect(@game.player_cruiser.sunk?).to eq(true)
+      expect(@game.game_over?).to eq(false)
+      2.times { @game.player_submarine.hit }
+      expect(@game.player_submarine.sunk?).to eq(true)
+      expect(@game.game_over?).to eq(true)
     end
   end
 
-  # describe "#end_game" do
-  #   #May not be able to test this, is terminal output
-  #   it "" do
-  # 
-  #   end
-  # end
+  describe "#computer_won?" do #AR
+    it "" do
+    end
 
-  describe "#winner" do
-    it "Will return the correct string ('You') if computer's ships have sunk" do 
+  end
+
+  describe "#player_won?" do #AR
+    it "" do
+    end
+
+  end
+
+  describe "#winner" do #AR
+    it "Will return the correct string ('You') if computer's ships have sunk" do
       comp_cruiser = Ship.new("Comp cruiser", 3)
       comp_sub = Ship.new("Comp sub", 2)
       player_cruiser = Ship.new("Player cruiser", 3)
@@ -121,7 +128,7 @@ RSpec.describe Game do
       expect(@game.winner).to eq("You")
     end
 
-    it "Will return the correct string ('I') if player's ships have sunk" do 
+    it "Will return the correct string ('I') if player's ships have sunk" do #AR
       comp_cruiser = Ship.new("Comp cruiser", 3)
       comp_sub = Ship.new("Comp sub", 2)
       player_cruiser = Ship.new("Player cruiser", 3)
@@ -139,7 +146,7 @@ RSpec.describe Game do
     end
   end
 
-  describe "#board_display" do
+  describe "#board_display" do #AR
     it "displays player ships but not computer ships" do
       comp_cruiser = Ship.new("Comp cruiser", 3)
       comp_sub = Ship.new("Comp sub", 2)
