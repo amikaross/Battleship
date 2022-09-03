@@ -25,10 +25,6 @@ RSpec.describe Game do
     end
   end
 
-  # describe "#main_menu" do
-  #   #may not be able to test, is all user input. Reassess later.
-  # end
-
   xdescribe "#play_game" do #AJP
     it "should loop should continue until the game is over" do
       expect(@game.game_over?).to eq(false)

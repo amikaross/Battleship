@@ -18,18 +18,6 @@ class Game
     @computer_submarine = Ship.new("Computer_submarine", 2)
   end
 
-  def main_menu #AJP
-    #It should print "Welcome to BATTLESHIP, etc (see greeting)"
-    #Gets user input
-    #Has response for "p", for "q" or for "other text"
-
-    if user_input == "p"
-      computer_board_setup
-      player_board_setup
-      play_game
-    end
-  end
-
   def computer_board_setup #AR
     cruiser_placement = random_placement(@computer_board, @computer_cruiser)
     @computer_board.place(@computer_cruiser, cruiser_placement)
