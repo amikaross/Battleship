@@ -7,7 +7,7 @@ RSpec.describe Game do
     @game = Game.new
   end
 
-  describe "#initialize" do #AJP
+  xdescribe "#initialize" do #AJP
     it "exists" do
       expect(@game).to be_an_instance_of(Game)
     end
@@ -17,7 +17,7 @@ RSpec.describe Game do
       expect(@game.computer_board).to be_an_instance_of(Board)
     end
 
-    it "each game has two ships for the player and two for the computer" do 
+    it "each game has two ships for the player and two for the computer" do
       expect(@game.player_cruiser).to be_an_instance_of(Ship)
       expect(@game.player_submarine).to be_an_instance_of(Ship)
       expect(@game.computer_cruiser).to be_an_instance_of(Ship)
@@ -42,7 +42,7 @@ RSpec.describe Game do
     end
   end
 
-  describe "#computer_board_setup" do #AJP
+  xdescribe "#computer_board_setup" do #AJP
     it "should add 2 ships to the board" do #AJP
       expect(@game.computer_board.cells.values.all? { |cell| cell.empty? }).to eq(true)
       @game.computer_board_setup
@@ -56,7 +56,7 @@ RSpec.describe Game do
     # end
   end
 
-  describe "#random_placement" do #AR
+  xdescribe "#random_placement" do #AR
     it "should return and array of valid coordinates" do
       coord_array = @game.random_placement(@game.computer_board, @game.computer_cruiser)
       coord_array.each do |coord|
@@ -78,7 +78,7 @@ RSpec.describe Game do
     end
   end
 
-  describe "#game_over?" do #AJP
+  xdescribe "#game_over?" do #AJP
     it "return true only if both ships belonging to 1 player are sunk" do
       expect(@game.game_over?).to eq(false)
       3.times { @game.player_cruiser.hit }
@@ -100,7 +100,7 @@ RSpec.describe Game do
     end
   end
 
-  describe "#winner" do #AR
+  xdescribe "#winner" do #AR
     it "Will return the correct string ('You') if computer's ships have sunk" do
       @game.player_board.place(@game.player_cruiser, ["A1", "A2", "A3"])
       @game.player_board.place(@game.player_submarine, ["B1", "B2"])
@@ -130,7 +130,7 @@ RSpec.describe Game do
     end
   end
 
-  xdescribe "#board_display" do #AR
+  describe "#board_display" do #AR
     it "displays player ships but not computer ships" do
       @game.player_board.place(@game.player_cruiser, [A1, A2, A3])
       @game.player_board.place(@game.player_submarine, [B1, B2])
@@ -150,4 +150,3 @@ RSpec.describe Game do
                                         "D . . . . \n"
     end
   end
-end
