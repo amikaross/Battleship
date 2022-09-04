@@ -35,7 +35,8 @@ class Game
   end
 
   def get_player_cruiser_coordinates
-    print "I have laid out my ships on the grid.\n"+
+    print "\n" +
+          "I have laid out my ships on the grid.\n"+
           "You now need to lay out your two ships.\n" +
           "The Cruiser is three units long and the Submarine is two units long.\n" +
           "#{@player_board.render(ship_shows = true)}" +
@@ -77,7 +78,8 @@ class Game
   end
 
   def end_game
-    print "#{winner} won!"
+    print "#{board_display}" +
+          "#{winner} won!\n"
   end
 
   def game_over?
@@ -124,6 +126,6 @@ class Game
           "=============COMPUTER BOARD=============\n" +
           "#{@computer_board.render}" +
           "==============PlAYER BOARD==============\n" +
-          "#{@player_board.render(true)}"
+          "#{@player_board.render(true)}\n"
   end
 end
