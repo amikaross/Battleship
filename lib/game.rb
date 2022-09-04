@@ -25,15 +25,18 @@ class Game
     @computer_board.place(@computer_submarine, sub_placement)
   end
 
+  def player_board_setup
+    cruiser_coord = get_player_cruiser_coordinates
+    @player_board.place(@player_cruiser, cruiser_coord)
+    submarine_coord = get_player_submarine_coordinates
+    @player_board.place(@player_submarine, submarine_coord)
+  end
+
   def get_player_cruiser_coordinates
     print "I have laid out my ships on the grid.\n"+
           "You now need to lay out your two ships.\n" +
           "The Cruiser is three units long and the Submarine is two units long.\n" +
-          "  1 2 3 4 \n" +
-          "A . . . . \n" +
-          "B . . . . \n" +
-          "C . . . . \n" +
-          "D . . . . \n" +
+          "#{@player_board.render(ship_shows = true)}" +
           "Enter the squares for the Cruiser (3 spaces, ex. A1 A2 A3):\n" +
           ">"
     cruiser_coord_array = gets.chomp.upcase.split
@@ -42,6 +45,7 @@ class Game
       ">"
       cruiser_coord_array = gets.chomp.upcase.split
     end
+      print @player_board.render(ship_shows = true)
   end
 
   def get_player_submarine_coordinates
@@ -53,12 +57,7 @@ class Game
       ">"
       submarine_coord_array = gets.chomp.upcase.split
     end
-  end
-
-  def place_player_ships
-    @player_board.place(@player_cruiser, cruiser_coord_array)
-    @player_board.place(@player_submarine, submarine_coord_array)
-    print @player_board.render(ship_shows = true)
+      print @player_board.render(ship_shows = true)
   end
 
   def play_game
@@ -122,40 +121,3 @@ class Game
           "#{@player_board.render(true)}"
   end
 end
-
-
-
-
-
-
-
-# def player_board_setup
-#   print "I have laid out my ships on the grid.\n"+
-#         "You now need to lay out your two ships.\n" +
-#         "The Cruiser is three units long and the Submarine is two units long.\n" +
-#         "  1 2 3 4 \n" +
-#         "A . . . . \n" +
-#         "B . . . . \n" +
-#         "C . . . . \n" +
-#         "D . . . . \n" +
-#         "Enter the squares for the Cruiser (3 spaces, ex. A1 A2 A3):\n" +
-#         ">"
-#   cruiser_coord_array = gets.chomp.upcase.split
-#   until @player_board.valid_placement?(@player_cruiser, cruiser_coord_array)
-#     print "Those are invalid coordinates. Please try again:\n" +
-#     ">"
-#     cruiser_coord_array = gets.chomp.upcase.split
-#   end
-#   @player_board.place(@player_cruiser, cruiser_coord_array)
-#   print @player_board.render(ship_shows = true)
-#   "Enter the squares for the Submarine (2 spaces, ex. B1 B2):\n" +
-#   ">"
-#   submarine_coord_array = gets.chomp.upcase.split
-#   until @player_board.valid_placement?(@player_submarine, submarine_coord_array)
-#     print "Those are invalid coordinates. Please try again:\n" +
-#     ">"
-#     submarine_coord_array = gets.chomp.upcase.split
-#   end
-#   @player_board.place(@player_submarine, submarine_coord_array)
-#   print @player_board.render(ship_shows = true)
-# end
