@@ -28,10 +28,10 @@ class Game
   def player_board_setup
     cruiser_coord = get_player_cruiser_coordinates
     @player_board.place(@player_cruiser, cruiser_coord)
-    print @player_board.render(ship_shows = true)
+    print "\n" +
+    "#{@player_board.render(ship_shows = true)}"
     submarine_coord = get_player_submarine_coordinates
     @player_board.place(@player_submarine, submarine_coord)
-    print @player_board.render(ship_shows = true)
   end
 
   def get_player_cruiser_coordinates
@@ -65,18 +65,19 @@ class Game
   def play_game
     until game_over?
       turn = Turn.new(@player_board, @computer_board)
-      puts board_display
+      print board_display
       player_shot = turn.get_player_shot
       computer_shot = turn.random_shot
       @computer_board = turn.player_fires(player_shot)
       @player_board = turn.computer_fires(computer_shot)
-      puts turn.results
+      print "\n" +
+      "#{turn.results}"
     end
     end_game
   end
 
   def end_game
-    puts "#{winner} won!"
+    print "#{winner} won!"
   end
 
   def game_over?
@@ -119,6 +120,7 @@ class Game
   end
 
   def board_display
+          "\n" +
           "=============COMPUTER BOARD=============\n" +
           "#{@computer_board.render}" +
           "==============PlAYER BOARD==============\n" +
