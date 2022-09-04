@@ -28,8 +28,10 @@ class Game
   def player_board_setup
     cruiser_coord = get_player_cruiser_coordinates
     @player_board.place(@player_cruiser, cruiser_coord)
+    print @player_board.render(ship_shows = true)
     submarine_coord = get_player_submarine_coordinates
     @player_board.place(@player_submarine, submarine_coord)
+    print @player_board.render(ship_shows = true)
   end
 
   def get_player_cruiser_coordinates
@@ -45,7 +47,7 @@ class Game
       ">"
       cruiser_coord_array = gets.chomp.upcase.split
     end
-      print @player_board.render(ship_shows = true)
+      cruiser_coord_array
   end
 
   def get_player_submarine_coordinates
@@ -57,7 +59,7 @@ class Game
       ">"
       submarine_coord_array = gets.chomp.upcase.split
     end
-      print @player_board.render(ship_shows = true)
+    submarine_coord_array
   end
 
   def play_game
