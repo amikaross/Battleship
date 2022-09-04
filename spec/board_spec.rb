@@ -75,6 +75,10 @@ RSpec.describe Board do
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
     end
 
+    it "it does not allow for repeated cells as coordinates" do
+      expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A1"])).to eq(false)
+    end
+
     it "requires ship length to equal coordinates length" do
       expect(@cruiser.length).to eq(3)
       expect(@board.valid_placement?(@cruiser, ["A1", "A2"])).to eq(false)
