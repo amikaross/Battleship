@@ -33,11 +33,11 @@ attr_accessor :cells
   end
 
   def consecutive_letter?(coord1, coord2)
-    coord1[0].ord == coord2[0].ord + 1 || coord1[0].ord == coord2[0].ord - 1
+    coord1[0].ord == coord2[0].ord - 1
   end
 
   def consecutive_number?(coord1, coord2)
-    coord1[1].ord == coord2[1].ord + 1 || coord1[1].ord == coord2[1].ord - 1
+    coord1[1].ord == coord2[1].ord - 1
   end
 
   def consecutive_cells?(coord_pair)
@@ -53,12 +53,24 @@ attr_accessor :cells
   end
 
   def all_consecutive?(coord_array)
-    coord_array.each_cons(2) do |coord_pair|
-      if consecutive_cells?(coord_pair) == false
-        return false
+    reverse = coord_array.reverse
+    if consecutive_letter?(coord_array[0], coord_array[1]) || consecutive_number?(coord_array[0], coord_array[1])
+      coord_array.each_cons(2) do |coord_pair|
+        if consecutive_cells?(coord_pair) == false
+          return false
+        end
       end
+      true
+    elsif consecutive_letter?(reverse[0], reverse[1]) || consecutive_number?(reverse[0], reverse[1])
+      reverse.each_cons(2) do |coord_pair|
+        if consecutive_cells?(coord_pair) == false
+          return false
+        end
+      end
+      true
+    else
+      false
     end
-    true
   end
 
   def ship_present?(coord_array)
