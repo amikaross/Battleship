@@ -26,13 +26,38 @@ class Game
   end
 
   def player_board_setup
-    puts "Place your cruiser on the board. You will need 3 coordinates."
-    puts "Cruiser placement: (ex. A1, A2, A3)"
-    cruiser_placement = [gets.chomp]
-    coordinates
-    #Take input, check through valid input, if so place ship if not new message
-    #update the boards to place the ships (place is a board method)
+    cruiser_coord = get_player_cruiser_coordinates
+    @player_board.place(@player_cruiser, cruiser_coord)
+    submarine_coord = get_player_submarine_coordinates
+    @player_board.place(@player_submarine, submarine_coord)
+  end
 
+  def get_player_cruiser_coordinates
+    print "I have laid out my ships on the grid.\n"+
+          "You now need to lay out your two ships.\n" +
+          "The Cruiser is three units long and the Submarine is two units long.\n" +
+          "#{@player_board.render(ship_shows = true)}" +
+          "Enter the squares for the Cruiser (3 spaces, ex. A1 A2 A3):\n" +
+          ">"
+    cruiser_coord_array = gets.chomp.upcase.split
+    until @player_board.valid_placement?(@player_cruiser, cruiser_coord_array)
+      print "Those are invalid coordinates. Please try again:\n" +
+      ">"
+      cruiser_coord_array = gets.chomp.upcase.split
+    end
+      print @player_board.render(ship_shows = true)
+  end
+
+  def get_player_submarine_coordinates
+    print "Enter the squares for the Submarine (2 spaces, ex. B1 B2):\n" +
+    ">"
+    submarine_coord_array = gets.chomp.upcase.split
+    until @player_board.valid_placement?(@player_submarine, submarine_coord_array)
+      print "Those are invalid coordinates. Please try again:\n" +
+      ">"
+      submarine_coord_array = gets.chomp.upcase.split
+    end
+      print @player_board.render(ship_shows = true)
   end
 
   def play_game
@@ -76,8 +101,8 @@ class Game
   def unoccupied_cells(board)
     unoccupied_cells = []
     board.cells.each do |coord, cell_object|
-      if cell_object.empty?  
-        unoccupied_cells << coord 
+      if cell_object.empty?
+        unoccupied_cells << coord
       end
     end
     unoccupied_cells
@@ -91,8 +116,10 @@ class Game
     end
   end
 
-  def board_display #AJP
-    #You have all of the little methods (board.render) that will help write the tests
-
+  def board_display
+          "=============COMPUTER BOARD=============\n" +
+          "#{@computer_board.render}" +
+          "==============PlAYER BOARD==============\n" +
+          "#{@player_board.render(true)}"
   end
 end

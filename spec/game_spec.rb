@@ -6,17 +6,17 @@ RSpec.describe Game do
     @game = Game.new
   end
 
-  describe "#initialize" do #AJP
+  describe "#initialize" do
     it "exists" do
       expect(@game).to be_an_instance_of(Game)
     end
 
-    it "each game has a computer-board and a player_board" do #AJP
+    it "each game has a computer-board and a player_board" do
       expect(@game.player_board).to be_an_instance_of(Board)
       expect(@game.computer_board).to be_an_instance_of(Board)
     end
 
-    it "each game has two ships for the player and two for the computer" do 
+    it "each game has two ships for the player and two for the computer" do
       expect(@game.player_cruiser).to be_an_instance_of(Ship)
       expect(@game.player_submarine).to be_an_instance_of(Ship)
       expect(@game.computer_cruiser).to be_an_instance_of(Ship)
@@ -24,7 +24,7 @@ RSpec.describe Game do
     end
   end
 
-  xdescribe "#play_game" do #AJP
+  xdescribe "#play_game" do
     it "should loop should continue until the game is over" do
       expect(@game.game_over?).to eq(false)
       @game.play_game
@@ -32,17 +32,8 @@ RSpec.describe Game do
     end
   end
 
-  xdescribe "#player_board_setup" do #AJP
+  describe "#computer_board_setup" do
     it "should add 2 ships to the board" do
-      expect(@player_board.cells.values.all? { |cell| cell.empty? }).to eq(true)
-      @game.player_board_setup
-      expect(@player_board.cells.values.all? { |cell| cell.empty? }).to eq(false)
-      expect(@player_board.cells.values.count { |cell| cell.empty? == false }).to eq(5)
-    end
-  end
-
-  describe "#computer_board_setup" do #AJP
-    it "should add 2 ships to the board" do #AJP
       expect(@game.computer_board.cells.values.all? { |cell| cell.empty? }).to eq(true)
       @game.computer_board_setup
       expect(@game.computer_board.cells.values.all? { |cell| cell.empty? }).to eq(false)
@@ -50,7 +41,7 @@ RSpec.describe Game do
     end
   end
 
-  describe "#random_placement" do #AR
+  describe "#random_placement" do
     it "should return and array of valid coordinates" do
       coord_array = @game.random_placement(@game.computer_board, @game.computer_cruiser)
       coord_array.each do |coord|
@@ -58,12 +49,12 @@ RSpec.describe Game do
       end
     end
 
-    it "has the correct number of coordinates compared to ship length" do #AR
+    it "has the correct number of coordinates compared to ship length" do
       coord_array = @game.random_placement(@game.computer_board, @game.computer_cruiser)
       expect(coord_array.length).to eq @game.computer_cruiser.length
     end
 
-    it "gives a valid placement" do #AR
+    it "gives a valid placement" do
       coord_array = @game.random_placement(@game.computer_board, @game.computer_cruiser)
       expect(@game.computer_board.valid_placement?(@game.computer_cruiser, coord_array)).to eq(true)
       @game.computer_board.place(@game.computer_cruiser, coord_array)
@@ -72,7 +63,7 @@ RSpec.describe Game do
     end
   end
 
-  describe "#game_over?" do #AJP
+  describe "#game_over?" do
     it "return true only if both ships belonging to 1 player are sunk" do
       expect(@game.game_over?).to eq(false)
       3.times { @game.player_cruiser.hit }
@@ -84,7 +75,7 @@ RSpec.describe Game do
     end
   end
 
-  describe "#computer_won?" do #AR
+  describe "#computer_won?" do
     it "returns true only if both player's ships are sunk" do
       @game.player_board.place(@game.player_cruiser, ["A1", "A2", "A3"])
       @game.player_board.place(@game.player_submarine, ["B1", "B2"])
@@ -100,7 +91,7 @@ RSpec.describe Game do
     end
   end
 
-  describe "#player_won?" do #AR
+  describe "#player_won?" do
     it "returns true only if both computer's ships are sunk" do
       @game.player_board.place(@game.player_cruiser, ["A1", "A2", "A3"])
       @game.player_board.place(@game.player_submarine, ["B1", "B2"])
@@ -148,12 +139,12 @@ RSpec.describe Game do
     end
   end
 
-  xdescribe "#board_display" do
+  describe "#board_display" do
     it "displays player ships but not computer ships" do
-      @game.player_board.place(@game.player_cruiser, [A1, A2, A3])
-      @game.player_board.place(@game.player_submarine, [B1, B2])
-      @game.computer_board.place(@game.computer_cruiser, [A1, A2, A3])
-      @game.computer_board.place(@game.computer_submarine, [B1, B2])
+      @game.player_board.place(@game.player_cruiser, ["A1", "A2", "A3"])
+      @game.player_board.place(@game.player_submarine, ["B1", "B2"])
+      @game.computer_board.place(@game.computer_cruiser, ["A1", "A2", "A3"])
+      @game.computer_board.place(@game.computer_submarine, ["B1", "B2"])
       expect(@game.board_display).to eq "=============COMPUTER BOARD=============\n" +
                                         "  1 2 3 4 \n" +
                                         "A . . . . \n" +
