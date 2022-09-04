@@ -12,9 +12,9 @@ class Game
   def initialize
     @player_board = Board.new
     @computer_board = Board.new
-    @player_cruiser = Ship.new("Player_cruiser", 3)
-    @player_submarine = Ship.new("Player_submarine", 2)
-    @computer_cruiser = Ship.new("Computer_cruiser", 3)
+    @player_cruiser = Ship.new("cruiser", 3)
+    @player_submarine = Ship.new("submarine", 2)
+    @computer_cruiser = Ship.new("cruiser", 3)
     @computer_submarine = Ship.new("Computer_submarine", 2)
   end
 
