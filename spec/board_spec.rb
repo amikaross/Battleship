@@ -49,7 +49,9 @@ RSpec.describe Board do
 
   describe "#consecutive_letter?" do
     it "returns correct boolean value" do
+    # require "pry";binding.pry
       expect(@board.consecutive_letter?("A1", "B1")).to eq(true)
+      # require "pry";binding.pry
       expect(@board.consecutive_letter?("A1", "A2")).to eq(false)
     end
   end
@@ -67,6 +69,15 @@ RSpec.describe Board do
       expect(@board.consecutive_cells?(["A1", "B2"])).to eq(false)
       expect(@board.consecutive_cells?(["B2", "B4"])).to eq(false)
       expect(@board.consecutive_cells?(["C3", "D4"])).to eq(false)
+    end
+  end
+
+  describe "#all_consecutive?" do
+    it "should return true for consecutive cells only" do
+      expect(@board.all_consecutive?(["A1", "A2", "A3"])).to eq(true)
+      expect(@board.all_consecutive?(["A3", "A2", "A1"])).to eq(true)
+      expect(@board.all_consecutive?(["A1", "A2", "A4"])).to eq(false)
+      expect(@board.all_consecutive?(["A1", "B2", "B3"])).to eq(false)
     end
   end
 
