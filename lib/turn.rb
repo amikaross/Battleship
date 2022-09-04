@@ -14,7 +14,7 @@ class Turn
   end
 
   def player_fires(player_shot)
-    @computer_board.cells[player_shot].fire_upon 
+    @computer_board.cells[player_shot].fire_upon
     @computer_board
   end
 
@@ -26,31 +26,32 @@ class Turn
   def get_player_shot
     print "Enter the coordinate for your shot:\n" +
           "> "
-    @player_shot = gets.chomp.upcase 
+    @player_shot = gets.chomp.upcase
     if @computer_board.valid_coordinate?(@player_shot) == false
       until @computer_board.valid_coordinate?(@player_shot) == true
         print "Please enter a valid coordinate:\n" +
               "> "
         @player_shot = gets.chomp.upcase
       end
-    end 
+    end
     if @computer_board.cells[@player_shot].fired_upon?
       until @computer_board.cells[@player_shot].fired_upon? == false
         print "You've already fired on that coordinate, please choose another:\n" +
               "> "
         @player_shot = gets.chomp.upcase
-      end 
-    end      
+      end
+    end
+    @player_shot
   end
 
   def random_shot
     unhit_cells = []
     @player_board.cells.each do |coord, cell_object|
-      if cell_object.fired_upon? == false 
-        unhit_cells << coord 
+      if cell_object.fired_upon? == false
+        unhit_cells << coord
       end
     end
-    @computer_shot = unhit_cells.sample 
+    @computer_shot = unhit_cells.sample
   end
 
   def results
@@ -64,7 +65,7 @@ class Turn
       "miss."
     elsif hit_cell.empty? == false && hit_cell.ship.sunk?
       "hit and has sunk my #{hit_cell.ship.name}!"
-    else 
+    else
       "hit!"
     end
   end
@@ -75,7 +76,7 @@ class Turn
       "miss."
     elsif hit_cell.empty? == false && hit_cell.ship.sunk?
       "hit and has sunk your #{hit_cell.ship.name}!"
-    else 
+    else
       "hit!"
     end
   end
