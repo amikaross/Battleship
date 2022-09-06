@@ -42,11 +42,11 @@ class Game
           "#{@player_board.render(ship_shows = true)}" +
           "Enter the squares for the Cruiser (3 spaces, ex. A1 A2 A3):\n" +
           "> "
-    coordinates = gets.chomp.upcase.split
+    coordinates = gets.chomp.strip.upcase.split
     until @player_board.valid_placement?(@player_cruiser, coordinates)
       print "Those are invalid coordinates. Please try again:\n" +
             "> "
-      coordinates = gets.chomp.upcase.split
+      coordinates = gets.chomp.strip.upcase.split
     end
     coordinates
   end
@@ -54,11 +54,11 @@ class Game
   def get_player_submarine_coordinates
     print "Enter the squares for the Submarine (2 spaces, ex. B1 B2):\n" +
           "> "
-    coordinates = gets.chomp.upcase.split
+    coordinates = gets.chomp.strip.upcase.split
     until @player_board.valid_placement?(@player_submarine, coordinates)
       print "Those are invalid coordinates. Please try again:\n" +
             "> "
-      coordinates = gets.chomp.upcase.split
+      coordinates = gets.chomp.strip.upcase.split
     end
     coordinates
   end

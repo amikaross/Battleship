@@ -29,11 +29,11 @@ class MainMenu
           "Would you like to return to the main menu?\n" +
           "Enter y for yes or n for no:\n" +
           "> "
-    response = gets.chomp.downcase
+    response = gets.chomp.strip.downcase
     until response == "y" || response == "n"
       print "I don't understand, please try again.\n" + 
             "> "
-      response = gets.chomp.downcase
+      response = gets.chomp.strip.downcase
     end
     if response == "n"
       print "Sorry to see you go, enjoy your day!"
