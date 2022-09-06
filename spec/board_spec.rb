@@ -40,10 +40,10 @@ RSpec.describe Board do
     end
   end
 
-  describe "#not_all_valid_coordinates?" do
+  describe "#all_valid_coordinates?" do
     it "returns correct boolean value" do
-      expect(@board.not_all_valid_coordinates?(["A1", "A2", "A3"])).to eq(false)
-      expect(@board.not_all_valid_coordinates?(["A1", "A2", "E1"])).to eq(true)
+      expect(@board.all_valid_coordinates?(["A1", "A2", "A3"])).to eq(true)
+      expect(@board.all_valid_coordinates?(["A1", "A2", "E1"])).to eq(false)
     end
   end
 
@@ -63,12 +63,12 @@ RSpec.describe Board do
     end
   end
 
-  describe "#consecutive_cells?" do
+  describe "#consecutive_pair?" do
     it "returns the correct boolean value" do
-      expect(@board.consecutive_cells?(["A1", "A2"])).to eq(true)
-      expect(@board.consecutive_cells?(["A1", "B2"])).to eq(false)
-      expect(@board.consecutive_cells?(["B2", "B4"])).to eq(false)
-      expect(@board.consecutive_cells?(["C3", "D4"])).to eq(false)
+      expect(@board.consecutive_pair?(["A1", "A2"])).to eq(true)
+      expect(@board.consecutive_pair?(["A1", "B2"])).to eq(false)
+      expect(@board.consecutive_pair?(["B2", "B4"])).to eq(false)
+      expect(@board.consecutive_pair?(["C3", "D4"])).to eq(false)
     end
   end
 

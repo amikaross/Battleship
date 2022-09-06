@@ -15,7 +15,7 @@ class Game
     @player_cruiser = Ship.new("cruiser", 3)
     @player_submarine = Ship.new("submarine", 2)
     @computer_cruiser = Ship.new("cruiser", 3)
-    @computer_submarine = Ship.new("Computer_submarine", 2)
+    @computer_submarine = Ship.new("submarine", 2)
   end
 
   def computer_board_setup
@@ -26,12 +26,12 @@ class Game
   end
 
   def player_board_setup
-    cruiser_coord = get_player_cruiser_coordinates
-    @player_board.place(@player_cruiser, cruiser_coord)
+    cruiser_placement = get_player_cruiser_coordinates
+    @player_board.place(@player_cruiser, cruiser_placement)
     print "\n" +
-    "#{@player_board.render(ship_shows = true)}"
-    submarine_coord = get_player_submarine_coordinates
-    @player_board.place(@player_submarine, submarine_coord)
+          "#{@player_board.render(ship_shows = true)}"
+    sub_placement = get_player_submarine_coordinates
+    @player_board.place(@player_submarine, sub_placement)
   end
 
   def get_player_cruiser_coordinates
@@ -41,26 +41,26 @@ class Game
           "The Cruiser is three units long and the Submarine is two units long.\n" +
           "#{@player_board.render(ship_shows = true)}" +
           "Enter the squares for the Cruiser (3 spaces, ex. A1 A2 A3):\n" +
-          ">"
-    cruiser_coord_array = gets.chomp.upcase.split
-    until @player_board.valid_placement?(@player_cruiser, cruiser_coord_array)
+          "> "
+    coordinates = gets.chomp.upcase.split
+    until @player_board.valid_placement?(@player_cruiser, coordinates)
       print "Those are invalid coordinates. Please try again:\n" +
-      ">"
-      cruiser_coord_array = gets.chomp.upcase.split
+            "> "
+      coordinates = gets.chomp.upcase.split
     end
-      cruiser_coord_array
+    coordinates
   end
 
   def get_player_submarine_coordinates
     print "Enter the squares for the Submarine (2 spaces, ex. B1 B2):\n" +
-    ">"
-    submarine_coord_array = gets.chomp.upcase.split
-    until @player_board.valid_placement?(@player_submarine, submarine_coord_array)
+          "> "
+    coordinates = gets.chomp.upcase.split
+    until @player_board.valid_placement?(@player_submarine, coordinates)
       print "Those are invalid coordinates. Please try again:\n" +
-      ">"
-      submarine_coord_array = gets.chomp.upcase.split
+            "> "
+      coordinates = gets.chomp.upcase.split
     end
-    submarine_coord_array
+    coordinates
   end
 
   def play_game
@@ -72,7 +72,7 @@ class Game
       @computer_board = turn.player_fires(player_shot)
       @player_board = turn.computer_fires(computer_shot)
       print "\n" +
-      "#{turn.results}"
+            "#{turn.results}"
     end
     end_game
   end
@@ -96,18 +96,18 @@ class Game
 
   def random_placement(board, ship)
     randomly_rotated_cells = unoccupied_cells(board).rotate(rand(unoccupied_cells(board).length))
-    randomly_rotated_cells.each_cons(ship.length) do |coord_array|
-      if board.valid_placement?(ship, coord_array)
-        return coord_array
+    randomly_rotated_cells.each_cons(ship.length) do |coordinates|
+      if board.valid_placement?(ship, coordinates)
+        return coordinates
       end
     end
   end
 
   def unoccupied_cells(board)
     unoccupied_cells = []
-    board.cells.each do |coord, cell_object|
+    board.cells.each do |coordinate, cell_object|
       if cell_object.empty?
-        unoccupied_cells << coord
+        unoccupied_cells << coordinate
       end
     end
     unoccupied_cells

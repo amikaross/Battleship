@@ -2,9 +2,7 @@ require "./lib/board"
 
 class Turn
   attr_reader :player_board,
-              :computer_board,
-              :player_shot,
-              :computer_shot
+              :computer_board
 
   def initialize(player_board, computer_board)
     @player_board = player_board
@@ -26,7 +24,7 @@ class Turn
   def get_player_shot
     print "Enter the coordinate for your shot:\n" +
           "> "
-    @player_shot = gets.chomp.upcase
+    @player_shot = gets.chomp.strip.upcase
     if @computer_board.valid_coordinate?(@player_shot) == false
       until @computer_board.valid_coordinate?(@player_shot) == true
         print "Please enter a valid coordinate:\n" +
