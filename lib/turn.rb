@@ -29,14 +29,14 @@ class Turn
       until @computer_board.valid_coordinate?(@player_shot) == true
         print "Please enter a valid coordinate:\n" +
               "> "
-        @player_shot = gets.chomp.upcase
+        @player_shot = gets.chomp.strip.upcase
       end
     end
     if @computer_board.cells[@player_shot].fired_upon?
       until @computer_board.cells[@player_shot].fired_upon? == false
         print "You've already fired on that coordinate, please choose another:\n" +
               "> "
-        @player_shot = gets.chomp.upcase
+        @player_shot = gets.chomp.strip.upcase
       end
     end
     @player_shot
