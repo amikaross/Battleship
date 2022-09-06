@@ -3,7 +3,7 @@ require "./lib/game"
 
 RSpec.describe Game do
   before(:each) do
-    @game = Game.new
+    @game = Game.new(["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"])
   end
 
   describe "#initialize" do

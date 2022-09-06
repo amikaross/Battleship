@@ -3,8 +3,8 @@ require './lib/turn'
 
 RSpec.describe Turn do
   before(:each) do
-    @player_board = Board.new
-    @computer_board = Board.new
+    @player_board = Board.new(["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"])
+    @computer_board = Board.new(["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"])
     @computer_submarine = Ship.new("computer sub", 2)
     @computer_cruiser = Ship.new("computer cruiser", 3)
     @player_submarine = Ship.new("player sub", 2)

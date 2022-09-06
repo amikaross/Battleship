@@ -16,7 +16,7 @@ class MainMenu
     if response == "q"
       print "Sorry BATTLESHIP is not your thing."
     else
-      game = Game.new
+      game = Game.new(board_coordinates(get_board_width, get_board_height))
       game.computer_board_setup
       game.player_board_setup
       game.play_game
@@ -40,5 +40,38 @@ class MainMenu
     else
       display
     end
+  end
+
+  def get_board_width
+    print "\n" +
+          "Please input the board width (whole number, 4 or greater):\n" +
+           "> "
+    width = gets.chomp.strip.to_i 
+    until width >= 4 
+      print "That is an invalid input, please try again:\n" +
+            "> "
+      width = gets.chomp.strip.to_i 
+    end
+    width
+  end 
+
+  def get_board_height
+    print "\n Thank you. Please input the board height (whole number, 4 or greater):\n" +
+          "> "
+    height = gets.chomp.strip.to_i 
+    until height >= 4 
+      print "That is an invalid input, please try again:\n" +
+            "> "
+      height = gets.chomp.strip.to_i 
+    end 
+    height
+  end
+
+  def board_coordinates (width, height)
+    numbers = (1..width.to_i).to_a.map { |number| number.to_s } 
+    letters = (65..(height + 64)).to_a.map { |number| number.chr }
+    coordinates = []
+    letters.each { |letter| numbers.each { |number| coordinates << letter + number } }
+    coordinates
   end
 end
