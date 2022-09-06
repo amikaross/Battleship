@@ -103,7 +103,11 @@ RSpec.describe Game do
     it "returns an array of unoccupied cells" do 
       @game.computer_board.place(@game.computer_cruiser, ["A1", "A2", "A3"])
       @game.computer_board.place(@game.computer_submarine, ["B1", "B2"])
-      expect(@game.unoccupied_cells(@game.computer_board)).to eq(["A4", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"])
+      expect(@game.unoccupied_cells(@game.computer_board)).to be_an(Array)
+      expect(@game.unoccupied_cells(@game.computer_board).length).to eq(@game.computer_board.cells.count - 5)
+      expect(@game.unoccupied_cells(@game.computer_board).include?("A1")).to eq(false)
+      expect(@game.unoccupied_cells(@game.computer_board).include?("A2")).to eq(false)
+      expect(@game.unoccupied_cells(@game.computer_board).include?("B3")).to eq(true)
     end
   end
 
