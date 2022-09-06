@@ -99,6 +99,14 @@ RSpec.describe Game do
     end
   end
 
+  describe "#unoccupied_cells" do 
+    it "returns an array of unoccupied cells" do 
+      @game.computer_board.place(@game.computer_cruiser, ["A1", "A2", "A3"])
+      @game.computer_board.place(@game.computer_submarine, ["B1", "B2"])
+      expect(@game.unoccupied_cells(@game.computer_board)).to eq(["A4", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"])
+    end
+  end
+
   describe "#winner" do
     it "Will return the correct string ('You') if computer's ships have sunk" do
       @game.player_board.place(@game.player_cruiser, ["A1", "A2", "A3"])
