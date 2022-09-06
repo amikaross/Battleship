@@ -2,7 +2,6 @@ require 'rspec'
 require './lib/cell'
 
 RSpec.describe Cell do
-# Setup for all tests (create a ship and cell)
   before(:each) do
     @cruiser = Ship.new("Cruiser", 3)
     @cell_1 = Cell.new("B4")

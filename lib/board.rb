@@ -24,73 +24,66 @@ attr_accessor :cells
               }
   end
 
-  def valid_coordinate?(coord)
-    @cells.keys.include?(coord)
+  def valid_coordinate?(coordinate)
+    @cells.keys.include?(coordinate)
   end
 
-  def not_all_valid_coordinates?(coord_array)
-    coord_array.all? { |coord| self.valid_coordinate?(coord)} == false
+  def all_valid_coordinates?(coordinates)
+    coordinates.all? { |coordinate| self.valid_coordinate?(coordinate) }
   end
 
-  def consecutive_letter?(coord1, coord2)
-    coord1[0].ord == coord2[0].ord - 1
+  def consecutive_letter?(coordinate_1, coordinate_2)
+    coordinate_1[0].ord == coordinate_2[0].ord - 1
   end
 
-  def consecutive_number?(coord1, coord2)
-    coord1[1].ord == coord2[1].ord - 1
+  def consecutive_number?(coordinate_1, coordinate_2)
+    coordinate_1[1].ord == coordinate_2[1].ord - 1
   end
 
-  def consecutive_cells?(coord_pair)
-    coord1 = coord_pair[0]
-    coord2 = coord_pair[1]
-    if coord1[0] == coord2[0] && consecutive_number?(coord1, coord2)
+  def consecutive_pair?(coordinate_pair)
+    coordinate_1 = coordinate_pair[0]
+    coordinate_2 = coordinate_pair[1]
+    if coordinate_1[0] == coordinate_2[0] && consecutive_number?(coordinate_1, coordinate_2)
       true
-    elsif coord1[1] == coord2[1] && consecutive_letter?(coord1, coord2)
+    elsif coordinate_1[1] == coordinate_2[1] && consecutive_letter?(coordinate_1, coordinate_2)
       true
     else
       false
     end
   end
 
-  def all_consecutive?(coord_array)
-    coord_array.each_cons(2) do |coord_pair|
-      if consecutive_cells?(coord_pair) == false
+  def all_consecutive?(coordinates)
+    coordinates.each_cons(2) do |coordinate_pair|
+      if consecutive_pair?(coordinate_pair) == false
         return false
       end
     end
     true
   end
 
-  def ship_present?(coord_array)
-    coord_array.each do |coord|
-      if @cells[coord].ship != nil
-        return true
-      end
-    end
-    false
+  def all_empty?(coordinates)
+    coordinates.all? { |coordinate| @cells[coordinate].empty? }
   end
 
-  def valid_placement?(ship, coord_array)
-    if ship.length != coord_array.length || not_all_valid_coordinates?(coord_array)
+  def valid_placement?(ship, coordinates)
+    if ship.length != coordinates.length || all_valid_coordinates?(coordinates) == false
       false
-    elsif ship_present?(coord_array)
+    elsif all_empty?(coordinates) == false
       false
-    elsif all_consecutive?(coord_array) == false && all_consecutive?(coord_array.reverse) == false
+    elsif all_consecutive?(coordinates) == false && all_consecutive?(coordinates.reverse) == false
       false
     else
       true
     end
   end
 
-  def place(ship, coord_array)
-    #will just place the ship on the board, the valid_placement method will do the checking
-    coord_array.each do |coord|
-      @cells[coord].place_ship(ship)
+  def place(ship, coordinates)
+    coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(ship)
     end
   end
 
   def render(ship_shows = false)
-      #return value has to be a string and it has to have a certain number of spaces to keep the board in figure
     if ship_shows == false
       "  1 2 3 4 \n" +
       "A #{@cells["A1"].render} #{@cells["A2"].render} #{@cells["A3"].render} #{@cells["A4"].render} \n" +
