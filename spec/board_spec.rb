@@ -73,9 +73,8 @@ RSpec.describe Board do
   end
 
   describe "#all_consecutive?" do
-    it "should return true for consecutive cells only" do
+    it "should return true for consecutive/non-diagonal cells only" do
       expect(@board.all_consecutive?(["A1", "A2", "A3"])).to eq(true)
-      #expect(@board.all_consecutive?(["A3", "A2", "A1"])).to eq(true)
       expect(@board.all_consecutive?(["A1", "A2", "A4"])).to eq(false)
       expect(@board.all_consecutive?(["A1", "B2", "B3"])).to eq(false)
     end
@@ -107,12 +106,9 @@ RSpec.describe Board do
     it "allows for reverse coordinates" do
       expect(@board.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to eq(true)
     end
-    # xit "coordinates can't be in reverse consecutive order" do
-    #   expect(@board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to eq(true)
-    #   expect(@board.valid_placement?(cruiser, ["A3", "A2", "A1"])).to eq(false)
-    # end
+ 
     it "the coordinates can't be diagonal" do
-      expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
+      expect(@board.valid_placement?(@cruiser, ["B2", "C3", "D4"])).to eq(false)
       expect(@board.valid_placement?(@cruiser, ["A1", "B2", "C3"])).to eq(false)
     end
 
@@ -121,10 +117,6 @@ RSpec.describe Board do
       expect(@board.valid_placement?(@submarine, ["B1", "B2"])).to eq(true)
       expect(@board.valid_placement?(@submarine, ["A1", "B1"])).to eq(false)
     end
-    # xit "If the previous checks pass, then valid_placement? should be true" do
-    #   expect(@board.valid_placement?(@cruiser, ["B1", "C1", "D1"])).to eq(true)
-    #   expect(@board.valid_placement?(@submarine, ["A1", "A2"])).to eq(true)
-    # end
   end
 
   describe "#place" do
