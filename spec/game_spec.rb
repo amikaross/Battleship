@@ -24,14 +24,6 @@ RSpec.describe Game do
     end
   end
 
-  xdescribe "#play_game" do
-    it "should loop should continue until the game is over" do
-      expect(@game.game_over?).to eq(false)
-      @game.play_game
-      expect(@game.game_over?).to eq(true)
-    end
-  end
-
   describe "#computer_board_setup" do
     it "should add 2 ships to the board" do
       expect(@game.computer_board.cells.values.all? { |cell| cell.empty? }).to eq(true)
@@ -145,7 +137,8 @@ RSpec.describe Game do
       @game.player_board.place(@game.player_submarine, ["B1", "B2"])
       @game.computer_board.place(@game.computer_cruiser, ["A1", "A2", "A3"])
       @game.computer_board.place(@game.computer_submarine, ["B1", "B2"])
-      expect(@game.board_display).to eq "=============COMPUTER BOARD=============\n" +
+      expect(@game.board_display).to eq "\n" +
+                                        "=============COMPUTER BOARD=============\n" +
                                         "  1 2 3 4 \n" +
                                         "A . . . . \n" +
                                         "B . . . . \n" +
@@ -156,7 +149,7 @@ RSpec.describe Game do
                                         "A S S S . \n" +
                                         "B S S . . \n" +
                                         "C . . . . \n" +
-                                        "D . . . . \n"
+                                        "D . . . . \n\n"
     end
   end
 end
