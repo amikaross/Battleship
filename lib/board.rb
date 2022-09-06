@@ -53,24 +53,12 @@ attr_accessor :cells
   end
 
   def all_consecutive?(coord_array)
-    reverse = coord_array.reverse
-    if consecutive_letter?(coord_array[0], coord_array[1]) || consecutive_number?(coord_array[0], coord_array[1])
-      coord_array.each_cons(2) do |coord_pair|
-        if consecutive_cells?(coord_pair) == false
-          return false
-        end
+    coord_array.each_cons(2) do |coord_pair|
+      if consecutive_cells?(coord_pair) == false
+        return false
       end
-      true
-    elsif consecutive_letter?(reverse[0], reverse[1]) || consecutive_number?(reverse[0], reverse[1])
-      reverse.each_cons(2) do |coord_pair|
-        if consecutive_cells?(coord_pair) == false
-          return false
-        end
-      end
-      true
-    else
-      false
     end
+    true
   end
 
   def ship_present?(coord_array)
@@ -85,9 +73,9 @@ attr_accessor :cells
   def valid_placement?(ship, coord_array)
     if ship.length != coord_array.length || not_all_valid_coordinates?(coord_array)
       false
-    elsif all_consecutive?(coord_array) == false
-      false
     elsif ship_present?(coord_array)
+      false
+    elsif all_consecutive?(coord_array) == false && all_consecutive?(coord_array.reverse) == false
       false
     else
       true
