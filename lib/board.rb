@@ -61,19 +61,14 @@ attr_accessor :cells
     true
   end
 
-  def ship_present?(coordinates)
-    coordinates.each do |coordinate|
-      if @cells[coordinate].empty? == false
-        return true
-      end
-    end
-    false
+  def all_empty?(coordinates)
+    coordinates.all? { |coordinate| @cells[coordinate].empty? }
   end
 
   def valid_placement?(ship, coordinates)
     if ship.length != coordinates.length || all_valid_coordinates?(coordinates) == false
       false
-    elsif ship_present?(coordinates)
+    elsif all_empty?(coordinates) == false
       false
     elsif all_consecutive?(coordinates) == false && all_consecutive?(coordinates.reverse) == false
       false

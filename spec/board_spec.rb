@@ -80,6 +80,14 @@ RSpec.describe Board do
     end
   end
 
+  describe "#all_empty?" do 
+    it "should return false if any of the cells at the given coordinates are occupied" do 
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      expect(@board.all_empty?(["A4", "B4", "C4"])).to eq(true)
+      expect(@board.all_empty?(["A2", "A3", "A4"])).to eq(false)
+    end
+  end
+
   describe "#valid_placement?" do
     it "takes two arguments, the ship object and array of coordinates" do
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
