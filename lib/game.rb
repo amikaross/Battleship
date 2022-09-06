@@ -28,12 +28,15 @@ class Game
   def player_board_setup
     cruiser_coord = get_player_cruiser_coordinates
     @player_board.place(@player_cruiser, cruiser_coord)
+    print "\n" +
+    "#{@player_board.render(ship_shows = true)}"
     submarine_coord = get_player_submarine_coordinates
     @player_board.place(@player_submarine, submarine_coord)
   end
 
   def get_player_cruiser_coordinates
-    print "I have laid out my ships on the grid.\n"+
+    print "\n" +
+          "I have laid out my ships on the grid.\n"+
           "You now need to lay out your two ships.\n" +
           "The Cruiser is three units long and the Submarine is two units long.\n" +
           "#{@player_board.render(ship_shows = true)}" +
@@ -45,7 +48,7 @@ class Game
       ">"
       cruiser_coord_array = gets.chomp.upcase.split
     end
-      print @player_board.render(ship_shows = true)
+      cruiser_coord_array
   end
 
   def get_player_submarine_coordinates
@@ -57,24 +60,26 @@ class Game
       ">"
       submarine_coord_array = gets.chomp.upcase.split
     end
-      print @player_board.render(ship_shows = true)
+    submarine_coord_array
   end
 
   def play_game
     until game_over?
       turn = Turn.new(@player_board, @computer_board)
-      puts board_display
+      print board_display
       player_shot = turn.get_player_shot
       computer_shot = turn.random_shot
       @computer_board = turn.player_fires(player_shot)
       @player_board = turn.computer_fires(computer_shot)
-      puts turn.results
+      print "\n" +
+      "#{turn.results}"
     end
     end_game
   end
 
   def end_game
-    puts "#{winner} won!"
+    print "#{board_display}" +
+          "#{winner} won!\n"
   end
 
   def game_over?
@@ -117,9 +122,10 @@ class Game
   end
 
   def board_display
+          "\n" +
           "=============COMPUTER BOARD=============\n" +
           "#{@computer_board.render}" +
           "==============PlAYER BOARD==============\n" +
-          "#{@player_board.render(true)}"
+          "#{@player_board.render(true)}\n"
   end
 end

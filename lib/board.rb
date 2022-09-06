@@ -33,11 +33,11 @@ attr_accessor :cells
   end
 
   def consecutive_letter?(coord1, coord2)
-    coord1[0].ord == coord2[0].ord + 1 || coord1[0].ord == coord2[0].ord - 1
+    coord1[0].ord == coord2[0].ord - 1
   end
 
   def consecutive_number?(coord1, coord2)
-    coord1[1].ord == coord2[1].ord + 1 || coord1[1].ord == coord2[1].ord - 1
+    coord1[1].ord == coord2[1].ord - 1
   end
 
   def consecutive_cells?(coord_pair)
@@ -73,9 +73,9 @@ attr_accessor :cells
   def valid_placement?(ship, coord_array)
     if ship.length != coord_array.length || not_all_valid_coordinates?(coord_array)
       false
-    elsif all_consecutive?(coord_array) == false
-      false
     elsif ship_present?(coord_array)
+      false
+    elsif all_consecutive?(coord_array) == false && all_consecutive?(coord_array.reverse) == false
       false
     else
       true

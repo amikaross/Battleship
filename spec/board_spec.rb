@@ -49,7 +49,9 @@ RSpec.describe Board do
 
   describe "#consecutive_letter?" do
     it "returns correct boolean value" do
+    # require "pry";binding.pry
       expect(@board.consecutive_letter?("A1", "B1")).to eq(true)
+      # require "pry";binding.pry
       expect(@board.consecutive_letter?("A1", "A2")).to eq(false)
     end
   end
@@ -70,9 +72,22 @@ RSpec.describe Board do
     end
   end
 
+  describe "#all_consecutive?" do
+    it "should return true for consecutive cells only" do
+      expect(@board.all_consecutive?(["A1", "A2", "A3"])).to eq(true)
+      #expect(@board.all_consecutive?(["A3", "A2", "A1"])).to eq(true)
+      expect(@board.all_consecutive?(["A1", "A2", "A4"])).to eq(false)
+      expect(@board.all_consecutive?(["A1", "B2", "B3"])).to eq(false)
+    end
+  end
+
   describe "#valid_placement?" do
     it "takes two arguments, the ship object and array of coordinates" do
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
+    end
+
+    it "it does not allow for repeated cells as coordinates" do
+      expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A1"])).to eq(false)
     end
 
     it "requires ship length to equal coordinates length" do
@@ -87,6 +102,10 @@ RSpec.describe Board do
       expect(@board.valid_placement?(@cruiser, ["C1", "B1", "A1"])).to eq(true)
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to eq(false)
       expect(@board.valid_placement?(@cruiser, ["A1", "B1", "D1"])).to eq(false)
+    end
+
+    it "allows for reverse coordinates" do
+      expect(@board.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to eq(true)
     end
     # xit "coordinates can't be in reverse consecutive order" do
     #   expect(@board.valid_placement?(cruiser, ["A1", "A2", "A3"])).to eq(true)
