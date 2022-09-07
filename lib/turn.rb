@@ -44,9 +44,9 @@ class Turn
 
   def random_shot
     unhit_cells = []
-    @player_board.cells.each do |coord, cell_object|
+    @player_board.cells.each do |coordinate, cell_object|
       if cell_object.fired_upon? == false
-        unhit_cells << coord
+        unhit_cells << coordinate
       end
     end
     @computer_shot = unhit_cells.sample

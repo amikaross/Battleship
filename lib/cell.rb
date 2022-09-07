@@ -1,7 +1,9 @@
 require "./lib/ship"
 
 class Cell
-  attr_reader :coordinate, :ship, :fired_upon
+  attr_reader :coordinate,
+              :ship,
+              :fired_upon
 
   def initialize(coordinate)
     @ship = nil
@@ -38,7 +40,6 @@ class Cell
   end
 
   def render(ship_shows = false)
-    #consider using or in addition to and, at that point order will matter
     if fired_upon? == false && empty? == false
       if ship_shows == true
         "S"

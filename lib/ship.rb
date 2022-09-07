@@ -1,5 +1,7 @@
 class Ship
-  attr_accessor :name, :length, :health
+  attr_accessor :name,
+                :length,
+                :health
 
   def initialize(name, length)
     @name = name
@@ -18,5 +20,4 @@ class Ship
       true
     end
   end
-
 end
