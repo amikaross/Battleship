@@ -49,9 +49,7 @@ RSpec.describe Board do
 
   describe "#consecutive_letter?" do
     it "returns correct boolean value" do
-    # require "pry";binding.pry
       expect(@board.consecutive_letter?("A1", "B1")).to eq(true)
-      # require "pry";binding.pry
       expect(@board.consecutive_letter?("A1", "A2")).to eq(false)
     end
   end

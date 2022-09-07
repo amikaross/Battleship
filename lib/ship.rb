@@ -18,5 +18,4 @@ class Ship
       true
     end
   end
-
 end
