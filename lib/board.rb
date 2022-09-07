@@ -76,7 +76,13 @@ attr_accessor :cells
   def render(ship_shows = false)
     height = @height
     width = @width
-    string = (1..width).each_with_object("  ") { |num, str| str << "#{num.to_s}  "}
+    string = (1..width).each_with_object("  ") do |num, str| 
+      if num >= 10 
+        str << "#{num.to_s} "
+      else 
+        str << "#{num.to_s}  "
+      end 
+    end 
     string << "\n" 
     (1..height).each do |row| 
       string << "#{(row + 64).chr} " 
