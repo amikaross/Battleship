@@ -16,7 +16,7 @@ class MainMenu
     if response == "q"
       print "Sorry BATTLESHIP is not your thing."
     else
-      game = Game.new(get_board_width, get_board_height)
+      game = Game.new(get_board_height, get_board_width)
       game.computer_board_setup
       game.player_board_setup
       game.play_game
@@ -56,7 +56,7 @@ class MainMenu
   end 
 
   def get_board_height
-    print "\n Thank you. Please input the board height (whole number, 4 or greater):\n" +
+    print "\n Please input the board height (whole number, 4 or greater):\n" +
           "> "
     height = gets.chomp.strip.to_i 
     until height >= 4 
