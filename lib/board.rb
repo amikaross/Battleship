@@ -25,14 +25,14 @@ attr_accessor :cells
   end
 
   def consecutive_number?(coordinate_1, coordinate_2)
-    coordinate_1.slice(1..coordinate_1.length).ord == coordinate_2.slice(1..coordinate_2.length).ord - 1
+    coordinate_1[1..-1].to_i == coordinate_2[1..-1].to_i - 1
   end
 
   def consecutive_pair?(coordinate_pair)
     coordinate_1 = coordinate_pair[0]
     coordinate_2 = coordinate_pair[1]
-    number_1 = coordinate_1.slice(1..coordinate_1.length)
-    number_2 = coordinate_2.slice(1..coordinate_2.length)
+    number_1 = coordinate_1[1..-1].to_i
+    number_2 = coordinate_2[1..-1].to_i
     if coordinate_1[0] == coordinate_2[0] && consecutive_number?(coordinate_1, coordinate_2)
       true
     elsif number_1 == number_2 && consecutive_letter?(coordinate_1, coordinate_2)
@@ -76,24 +76,16 @@ attr_accessor :cells
   def render(ship_shows = false)
     height = @height
     width = @width
-    string = (1..width).each_with_object("  ") { |num, str| str << "#{num.to_s} "}
+    string = (1..width).each_with_object("  ") { |num, str| str << "#{num.to_s}  "}
     string << "\n" 
     (1..height).each do |row| 
       string << "#{(row + 64).chr} " 
       (1..width).each do |column|
-        if column < 10
-          if ship_shows == false
-            string << "#{@cells.values[(column + ((row - 1)*width))-1].render} "
-          else 
-            string << "#{@cells.values[(column + ((row - 1)*width))-1].render(true)} "
-          end
+        if ship_shows == false
+          string << "#{@cells.values[(column + ((row - 1)*width))-1].render}  "
         else 
-          if ship_shows == false
-            string << "#{@cells.values[(column + ((row - 1)*width))-1].render}  "
-          else 
-            string << "#{@cells.values[(column + ((row - 1)*width))-1].render(true)}  "
-          end
-        end 
+          string << "#{@cells.values[(column + ((row - 1)*width))-1].render(true)}  "
+        end
       end
       string << "\n"
     end

@@ -126,6 +126,7 @@ class Game
           "=============COMPUTER BOARD=============\n" +
           "#{@computer_board.render}" +
           "==============PlAYER BOARD==============\n" +
-          "#{@player_board.render(true)}\n"
+          "#{@player_board.render(true)}" +
+          "\n"
   end
 end
