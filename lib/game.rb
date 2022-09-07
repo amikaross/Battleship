@@ -9,9 +9,9 @@ class Game
               :computer_cruiser,
               :computer_submarine
 
-  def initialize
-    @player_board = Board.new
-    @computer_board = Board.new
+  def initialize(height, width)
+    @player_board = Board.new(height, width)
+    @computer_board = Board.new(height, width)
     @player_cruiser = Ship.new("cruiser", 3)
     @player_submarine = Ship.new("submarine", 2)
     @computer_cruiser = Ship.new("cruiser", 3)
@@ -126,6 +126,7 @@ class Game
           "=============COMPUTER BOARD=============\n" +
           "#{@computer_board.render}" +
           "==============PlAYER BOARD==============\n" +
-          "#{@player_board.render(true)}\n"
+          "#{@player_board.render(true)}" +
+          "\n"
   end
 end

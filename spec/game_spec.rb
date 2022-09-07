@@ -3,7 +3,7 @@ require "./lib/game"
 
 RSpec.describe Game do
   before(:each) do
-    @game = Game.new
+    @game = Game.new(4, 4)
   end
 
   describe "#initialize" do
@@ -151,17 +151,18 @@ RSpec.describe Game do
       @game.computer_board.place(@game.computer_submarine, ["B1", "B2"])
       expect(@game.board_display).to eq "\n" +
                                         "=============COMPUTER BOARD=============\n" +
-                                        "  1 2 3 4 \n" +
-                                        "A . . . . \n" +
-                                        "B . . . . \n" +
-                                        "C . . . . \n" +
-                                        "D . . . . \n" +
+                                        "  1  2  3  4  \n" + 
+                                        "A .  .  .  .  \n" + 
+                                        "B .  .  .  .  \n" + 
+                                        "C .  .  .  .  \n" + 
+                                        "D .  .  .  .  \n" +
                                         "==============PlAYER BOARD==============\n" +
-                                        "  1 2 3 4 \n" +
-                                        "A S S S . \n" +
-                                        "B S S . . \n" +
-                                        "C . . . . \n" +
-                                        "D . . . . \n\n"
+                                        "  1  2  3  4  \n" + 
+                                        "A S  S  S  .  \n" + 
+                                        "B S  S  .  .  \n" + 
+                                        "C .  .  .  .  \n" + 
+                                        "D .  .  .  .  \n" +
+                                        "\n"
     end
   end
 end
