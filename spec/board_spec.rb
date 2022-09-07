@@ -48,21 +48,21 @@ RSpec.describe Board do
   end
 
   describe "#consecutive_letter?" do
-    it "returns correct boolean value" do
+    it "returns true if letters are consecutive, false if they are not" do
       expect(@board.consecutive_letter?("A1", "B1")).to eq(true)
       expect(@board.consecutive_letter?("A1", "A2")).to eq(false)
     end
   end
 
   describe "#consecutive_number?" do
-    it "returns the correct boolean value" do
+    it "returns true if numbers are consecutive, false if they are not" do
       expect(@board.consecutive_number?("A1", "A2")).to eq(true)
       expect(@board.consecutive_number?("A1", "B1")).to eq(false)
     end
   end
 
   describe "#consecutive_pair?" do
-    it "returns the correct boolean value" do
+    it "returns true if coordinate pairs are consecutive, false if they are not" do
       expect(@board.consecutive_pair?(["A1", "A2"])).to eq(true)
       expect(@board.consecutive_pair?(["A1", "B2"])).to eq(false)
       expect(@board.consecutive_pair?(["B2", "B4"])).to eq(false)
@@ -78,8 +78,8 @@ RSpec.describe Board do
     end
   end
 
-  describe "#all_empty?" do 
-    it "should return false if any of the cells at the given coordinates are occupied" do 
+  describe "#all_empty?" do
+    it "should return false if any of the cells at the given coordinates are occupied" do
       @board.place(@cruiser, ["A1", "A2", "A3"])
       expect(@board.all_empty?(["A4", "B4", "C4"])).to eq(true)
       expect(@board.all_empty?(["A2", "A3", "A4"])).to eq(false)
@@ -112,7 +112,7 @@ RSpec.describe Board do
     it "allows for reverse coordinates" do
       expect(@board.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to eq(true)
     end
- 
+
     it "the coordinates can't be diagonal" do
       expect(@board.valid_placement?(@cruiser, ["B2", "C3", "D4"])).to eq(false)
       expect(@board.valid_placement?(@cruiser, ["A1", "B2", "C3"])).to eq(false)
