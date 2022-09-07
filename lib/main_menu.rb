@@ -16,7 +16,7 @@ class MainMenu
     if response == "q"
       print "Sorry BATTLESHIP is not your thing."
     else
-      game = Game.new(board_coordinates(get_board_width, get_board_height))
+      game = Game.new(get_board_width, get_board_height)
       game.computer_board_setup
       game.player_board_setup
       game.play_game
@@ -65,13 +65,5 @@ class MainMenu
       height = gets.chomp.strip.to_i 
     end 
     height
-  end
-
-  def board_coordinates (width, height)
-    numbers = (1..width.to_i).to_a.map { |number| number.to_s } 
-    letters = (65..(height + 64)).to_a.map { |number| number.chr }
-    coordinates = []
-    letters.each { |letter| numbers.each { |number| coordinates << letter + number } }
-    coordinates
   end
 end

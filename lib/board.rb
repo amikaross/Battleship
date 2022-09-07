@@ -3,8 +3,13 @@ require './lib/cell'
 class Board
 attr_accessor :cells
 
-  def initialize(board_coordinates)
-    @cells = Hash[board_coordinates.map { |coordinate| [coordinate, Cell.new(coordinate)] }]
+  def initialize(height, width)
+    @height = height
+    @width = width
+    numbers = (1..width).to_a.map { |number| number.to_s } 
+    letters = (65..(height + 64)).to_a.map { |number| number.chr }
+    keys = letters.each_with_object([]) { |letter, array| numbers.each { |number| array << letter + number } }
+    @cells = Hash[keys.map { |key| [key, Cell.new(key)] }]
   end
 
   def valid_coordinate?(coordinate)

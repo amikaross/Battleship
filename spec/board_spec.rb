@@ -4,7 +4,7 @@ require './lib/board'
 
 RSpec.describe Board do
   before(:each) do
-    @board = Board.new(["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"])
+    @board = Board.new(4, 4)
     @cruiser = Ship.new("Cruiser", 3)
     @submarine = Ship.new("Submarine", 2)
   end
@@ -18,8 +18,12 @@ RSpec.describe Board do
       expect(@board.cells).to be_a(Hash)
     end
 
-    it "the cells attribute has 16 key/value pairs" do
-      expect(@board.cells.length).to eq 16
+    it "the cells attribute has a number of key/value pairs to match arguments" do
+      expect(@board.cells.count).to eq(16)
+      board2 = Board.new(2, 3)
+      expect(board2.cells.count).to eq(6)
+      board3 = Board.new(6, 6)
+      expect(board3.cells.count).to eq(36)
     end
 
     it "the cells attribute keys point to Cell objects" do
