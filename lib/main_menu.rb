@@ -56,10 +56,10 @@ class MainMenu
   end 
 
   def get_board_height
-    print "\n Please input the board height (whole number, 4 or greater):\n" +
+    print "\n Please input the board height (whole number, between 4 and 26):\n" +
           "> "
     height = gets.chomp.strip.to_i 
-    until height >= 4 
+    until height >= 4 && height <= 26
       print "That is an invalid input, please try again:\n" +
             "> "
       height = gets.chomp.strip.to_i 
