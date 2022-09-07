@@ -21,14 +21,14 @@ RSpec.describe Turn do
       expect(@turn).to be_an_instance_of(Turn)
     end
 
-    it "has a readable player_board and computer_board" do 
+    it "has a readable player_board and computer_board" do
       expect(@turn.player_board).to eq(@player_board)
       expect(@turn.computer_board).to eq(@computer_board)
     end
   end
 
   describe "#player_fires" do
-    it "Should update fired_upon status of a cell object on the computer_board" do
+    it "should update fired_upon status of a cell object on the computer_board" do
       expect(@turn.computer_board.cells.values.all? { |cell| cell.fired_upon? == false }).to eq(true)
       @turn.player_fires("A1")
       expect(@turn.computer_board.cells["A1"].fired_upon?).to eq(true)
@@ -36,13 +36,13 @@ RSpec.describe Turn do
       expect(@turn.computer_board.cells["B4"].fired_upon?).to eq(true)
     end
 
-    it "should return the updated computer_board object" do 
+    it "should return the updated computer_board object" do
       expect(@turn.player_fires("B2")).to eq(@turn.computer_board)
     end
   end
 
   describe "#computer_fires" do
-    it "Should update the cell object on the player's board with correct fired upon status" do
+    it "should update the cell object on the player's board with correct fired upon status" do
       expect(@turn.player_board.cells.values.all? { |cell| cell.fired_upon == false }).to eq(true)
       @turn.computer_fires("A1")
       expect(@turn.player_board.cells["A1"].fired_upon?).to eq(true)
@@ -55,17 +55,13 @@ RSpec.describe Turn do
     end
   end
 
-  # describe "#get_player_shot" do 
-  #   may not be able to test - user input
-  # end
-
-  describe "#random_shot" do 
-    it "returns a single valid coordinate" do 
+  describe "#random_shot" do
+    it "returns a single valid coordinate" do
       shot = @turn.random_shot
       expect(@turn.player_board.valid_coordinate?(shot)).to eq(true)
     end
 
-    it "only returns a coordinate that hasn't already been fired upon" do 
+    it "only returns a coordinate that hasn't already been fired upon" do
       @turn.player_board.cells["A2"].fire_upon
       @turn.player_board.cells["A3"].fire_upon
       @turn.player_board.cells["A4"].fire_upon
@@ -86,7 +82,7 @@ RSpec.describe Turn do
 
     it "returns a different random coordinate every time called" do
       shot_1 = @turn.random_shot
-      shot_2 = @turn.random_shot 
+      shot_2 = @turn.random_shot
       expect(shot_1 != shot_2)
     end
   end
